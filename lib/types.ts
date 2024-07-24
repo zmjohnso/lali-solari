@@ -1,0 +1,69 @@
+export interface PhotoWithId {
+  sys: {
+    id: string;
+  };
+  title: string;
+  url: string;
+}
+
+export interface MinimumPhoto {
+  title: string;
+  url: string;
+}
+
+export interface MinimumHomePage {
+  title: string;
+  thumbnail: PhotoWithId;
+}
+
+export interface MinimumHomePageCollection {
+  items: MinimumHomePage[];
+}
+
+export interface MinimumHomePageResponse {
+  data: {
+    minimumHomePageCollection: MinimumHomePageCollection;
+  };
+}
+
+export interface GalleryItem {
+  title: string;
+  photo: MinimumPhoto;
+  thumbnail: PhotoWithId;
+  gallery: {
+    name: string;
+    description: string;
+  };
+  paintingData: {
+    size: string;
+    technique: string;
+  };
+}
+
+export interface GalleryItemCollection {
+  items: GalleryItem[];
+}
+
+export interface GalleryItemResponse {
+  data: {
+    galleryPhotoCollection: GalleryItemCollection;
+  };
+}
+
+export interface AboutPageResponse {
+  data: {
+    aboutCollection: AboutPageColloction;
+  };
+}
+
+export interface AboutPageColloction {
+  items: AboutPage[];
+}
+
+export interface AboutPage {
+  title: string;
+  description: string;
+  mediaCollection: {
+    items: MinimumPhoto[];
+  };
+}
