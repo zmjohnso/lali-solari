@@ -52,15 +52,33 @@ export interface GalleryItemResponse {
 
 export interface AboutPageResponse {
   data: {
-    aboutCollection: AboutPageColloction;
+    aboutCollection: AboutPageCollection;
   };
 }
 
-export interface AboutPageColloction {
+export interface AboutPageCollection {
   items: AboutPage[];
 }
 
 export interface AboutPage {
+  title: string;
+  description: string;
+  mediaCollection: {
+    items: MinimumPhoto[];
+  };
+}
+
+export interface ManifestoPageResponse {
+  data: {
+    manifiestoCollection: ManifestoPageCollection;
+  };
+}
+
+export interface ManifestoPageCollection {
+  items: ManifestoPage[];
+}
+
+export interface ManifestoPage {
   title: string;
   description: string;
   mediaCollection: {

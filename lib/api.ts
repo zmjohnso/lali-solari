@@ -5,8 +5,26 @@ import {
   GalleryItem,
   GalleryItemResponse,
   AboutPageResponse,
+  ManifestoPageResponse,
 } from "./types";
 import { Locale } from "@/src/app/shared/types";
+
+const MANIFESTO_PAGE_QUERY = `
+  query ($locale: String!) {
+    manifiestoCollection(locale: $locale) {
+      items {
+        title
+        description
+        mediaCollection {
+          items {
+            title
+            url
+          }
+        }
+      }
+    }
+  }
+`;
 
 const ABOUT_PAGE_QUERY = `
   query ($locale: String!) {
@@ -92,6 +110,17 @@ async function fetchGraphQL<T>(
   ).then((response) => response.json());
 }
 
+export async function getManifestoPageData(lang: Locale) {
+  const variables = { locale: lang };
+  const data = await fetchGraphQL<ManifestoPageResponse>(
+    MANIFESTO_PAGE_QUERY,
+    variables,
+    "manifesto"
+  );
+  // there should only ever be one manifesto page, so we return the first item
+  return data.data.manifiestoCollection.items[0];
+}
+
 export async function getAboutPageData(lang: Locale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<AboutPageResponse>(
@@ -100,7 +129,6 @@ export async function getAboutPageData(lang: Locale) {
     "about"
   );
   // there should only ever be one about page, so we return the first item
-  console.log("data1:", data.data.aboutCollection);
   return data.data.aboutCollection.items[0];
 }
 
