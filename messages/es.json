@@ -1,0 +1,26 @@
+{
+  "Home": {
+    "metaDescription": "Página principal de Lali Solari que muestra sus diversas colecciones, con enlaces para comprar sus obras, obtener más información sobre ella y contactarla.",
+    "pageTitle": "Página Principal",
+    "manifesto": "Manifiesto",
+    "abstractReverberations": "Abstract Reverberations",
+    "symbiosis": "Simbiosis",
+    "pandemic": "Pandemia",
+    "roots": "Raíces"
+  },
+  "Contact": {
+    "title": "¡Hola, hablemos!",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "yourMessage": "Tu mensaje",
+    "submit": "Enviar",
+    "required": "Campo requerido.",
+    "messageSent": "¡Gracias por tu mensaje!"
+  },
+  "Error": {
+    "title": "¡Vaya! Algo salió mal.",
+    "body": "No pudimos encontrar la página que estabas buscando. Puede que haya sido eliminada, o tal vez escribiste mal la dirección.",
+    "backHome": "Volver a Inicio"
+  }
+}
