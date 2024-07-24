@@ -12,7 +12,7 @@ const config: Config = {
         "open-sans": ["Open Sans", "sans-serif"],
         arimo: ["Arimo", "sans-serif"],
         bison: ["Bison", "sans-serif"],
-        bebas: ["Bebas Neue"],
+        bebas: ["Bebas Neue", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

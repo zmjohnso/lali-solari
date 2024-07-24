@@ -9,8 +9,7 @@ interface HomePageProps {
 }
 
 export default function Home({ homePage }: HomePageProps) {
-  // const homePage = await getMinimumHomePageData();
-  const t = useTranslations("Home"); // not callable within an async function
+  const t = useTranslations("Home");
 
   const arPhotos = homePage.filter(
     (x) => extractTitle(x.title) === t("abstractReverberations")
@@ -36,33 +35,35 @@ export default function Home({ homePage }: HomePageProps) {
   return (
     <div className="flex flex-col justify-center items-center px-4 md:px-8 mb-4">
       <Link href="/manifesto">
-        <h1 className="font-bold font-bebas uppercase text-[clamp(2rem,18vw,20rem)] hover:text-neon-green ml-12 md:ml-32">
+        <h1 className="font-bold tracking-tighter font-bebas uppercase text-[clamp(2rem,13vw,20rem)] hover:text-neon-green ml-12 md:ml-32">
           {t("manifesto")}
         </h1>
       </Link>
-      <Link href="/about">
-        <h1
-          className="font-bold font-bebas text-[clamp(2rem,16vw,18rem)] hover:text-neon-green cursor-pointer"
-          lang="en"
+      <div className="flex flex-row">
+        <Link href="/about">
+          <h1
+            className="font-bold tracking-tighter font-bebas text-[clamp(2rem,11vw,18rem)] hover:text-neon-green"
+            lang="en"
+          >
+            ABOUT
+          </h1>
+        </Link>
+        <a
+          href="https://www.etsy.com/es/shop/Lalisolariart"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          ABOUT
-        </h1>
-      </Link>
-      <a
-        href="https://www.etsy.com/es/shop/Lalisolariart"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <h2
-          className="font-bold font-bison italic text-[clamp(2rem,16vw,18rem)] hover:text-neon-green cursor-pointer"
-          lang="en"
-        >
-          GALLERY
-        </h2>
-      </a>
+          <h2
+            className="font-bold tracking-tighter font-bison italic text-[clamp(2rem,12vw,18rem)] hover:text-neon-green"
+            lang="en"
+          >
+            GALLERY
+          </h2>
+        </a>
+      </div>
       <Link href="/contact">
         <h2
-          className="font-bold font-bebas text-[clamp(2rem,11vw,18rem)] hover:text-neon-green cursor-pointer mr-8 md:mr-16"
+          className="font-bold tracking-tighter font-bebas text-[clamp(2rem,9vw,18rem)] hover:text-neon-green mr-8 md:mr-16"
           lang="en"
         >
           CONTACT
@@ -70,7 +71,7 @@ export default function Home({ homePage }: HomePageProps) {
       </Link>
       <Link href="/exclusive-designs">
         <h2
-          className="font-bold font-bison italic text-[clamp(0.5rem,6vw,8rem)] hover:text-neon-green cursor-pointer ml-32 md:ml-84"
+          className="font-bold tracking-tight font-bison italic text-[clamp(0.5rem,5vw,8rem)] hover:text-neon-green ml-32 md:ml-84"
           lang="en"
         >
           EXCLUSIVE DESIGNS
