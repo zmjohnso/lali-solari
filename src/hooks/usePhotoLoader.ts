@@ -1,3 +1,5 @@
+"use client";
+
 import { MinimumPhoto, PhotoWithId } from "@/lib/types";
 import { useState, useEffect } from "react";
 

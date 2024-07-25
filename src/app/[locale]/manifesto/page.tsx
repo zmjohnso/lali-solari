@@ -1,13 +1,14 @@
 import { getManifestoPageData } from "@/lib/api";
-import { Locale } from "../../shared/types";
+import { getContentfulLocale } from "@/src/shared/utilities";
 
 export default async function Manifesto({
   params,
 }: {
   params: { locale: string };
 }) {
-  const i18nLocale: Locale = params.locale === "en" ? "en-US" : "es";
-  const manifestoPage = await getManifestoPageData(i18nLocale);
+  const manifestoPage = await getManifestoPageData(
+    getContentfulLocale(params.locale)
+  );
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">

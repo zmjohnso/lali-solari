@@ -7,7 +7,7 @@ import {
   AboutPageResponse,
   ManifestoPageResponse,
 } from "./types";
-import { Locale } from "@/src/app/shared/types";
+import { ContentfulLocale } from "@/src/app/shared/types";
 
 const MANIFESTO_PAGE_QUERY = `
   query ($locale: String!) {
@@ -110,7 +110,7 @@ async function fetchGraphQL<T>(
   ).then((response) => response.json());
 }
 
-export async function getManifestoPageData(lang: Locale) {
+export async function getManifestoPageData(lang: ContentfulLocale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<ManifestoPageResponse>(
     MANIFESTO_PAGE_QUERY,
@@ -121,7 +121,7 @@ export async function getManifestoPageData(lang: Locale) {
   return data.data.manifiestoCollection.items[0];
 }
 
-export async function getAboutPageData(lang: Locale) {
+export async function getAboutPageData(lang: ContentfulLocale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<AboutPageResponse>(
     ABOUT_PAGE_QUERY,
@@ -133,7 +133,7 @@ export async function getAboutPageData(lang: Locale) {
 }
 
 export async function getMinimumHomePageData(
-  lang: Locale
+  lang: ContentfulLocale
 ): Promise<MinimumHomePage[]> {
   const variables = { locale: lang };
   const data = await fetchGraphQL<MinimumHomePageResponse>(
@@ -145,7 +145,7 @@ export async function getMinimumHomePageData(
 }
 
 export async function getGalleryDisplayPageData(
-  lang: Locale
+  lang: ContentfulLocale
 ): Promise<GalleryItem[]> {
   const variables = { locale: lang };
   const data = await fetchGraphQL<GalleryItemResponse>(

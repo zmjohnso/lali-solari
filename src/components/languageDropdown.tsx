@@ -2,19 +2,13 @@
 
 import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
-import { useStore } from "../app/store/store";
 import { usePathname, useRouter } from "next/navigation";
-import { Locale } from "../app/shared/types";
 
 const LanguageDropdown: React.FC = () => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [languageMode, setLanguageMode] = useStore((state) => [
-    state.languageMode,
-    state.setLanguageMode,
-  ]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
@@ -42,17 +36,11 @@ const LanguageDropdown: React.FC = () => {
   }, [isOpen]);
 
   const handleLanguageMode = (currentLanguage: string) => {
-    const newLanguageMode: Locale =
-      currentLanguage === "English" ? "en-US" : "es";
-    const newRouteFormat = currentLanguage === "English" ? "en" : "es";
-
-    if (languageMode !== newLanguageMode) {
-      const newUrl = pathname.replace(/^\/(en|es)/, `/${newRouteFormat}`);
-      setLanguageMode(newLanguageMode);
-      startTransition(() => {
-        router.replace(newUrl);
-      });
-    }
+    const newRouteLanguage = currentLanguage === "English" ? "en" : "es";
+    const newUrl = pathname.replace(/^\/(en|es)/, `/${newRouteLanguage}`);
+    startTransition(() => {
+      router.replace(newUrl);
+    });
   };
 
   const languageOptions = ["English", "castellano"];

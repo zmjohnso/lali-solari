@@ -1,14 +1,15 @@
 import { getGalleryDisplayPageData } from "@/lib/api";
-import { Locale } from "@/src/app/shared/types";
 import GalleryDisplay from "@/src/components/galleryDisplay";
+import { getContentfulLocale } from "@/src/shared/utilities";
 
 export default async function Page({
   params,
 }: {
   params: { locale: string; id: string };
 }) {
-  const i18nLocale: Locale = params.locale === "en" ? "en-US" : "es";
-  const galleryDisplayPage = await getGalleryDisplayPageData(i18nLocale);
+  const galleryDisplayPage = await getGalleryDisplayPageData(
+    getContentfulLocale(params.locale)
+  );
   const mainPhoto = galleryDisplayPage.find(
     (item) => item.thumbnail.sys.id === params.id
   );

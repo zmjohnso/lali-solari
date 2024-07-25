@@ -1,3 +1,5 @@
+import { ContentfulLocale } from "../app/shared/types";
+
 export const extractPhotoId = (input: string): number => {
   // Split the string by spaces and get the last item
   const parts = input.trim().split(/\s+/);
@@ -15,3 +17,6 @@ export const extractTitle = (input: string): string => {
   const match = input.match(/^[^\d]+/);
   return match ? match[0].trim() : "";
 };
+
+export const getContentfulLocale = (lang: string): ContentfulLocale =>
+  lang === "es" ? "es" : "en-US";

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { extractTitle } from "@/src/shared/utilities";
 import { MinimumHomePage } from "@/lib/types";
 import { PhotoGridItem } from "./photoGridItem";
-import Link from "next/link";
+import { Link } from "../navigation";
 
 interface HomePageProps {
   homePage: MinimumHomePage[];
@@ -63,7 +63,7 @@ export default function Home({ homePage }: HomePageProps) {
       </div>
       <Link href="/contact">
         <h2
-          className="font-bold tracking-tighter font-bebas text-[clamp(2rem,9vw,18rem)] hover:text-neon-green mr-8 md:mr-16"
+          className="font-bold tracking-tighter font-bebas text-[clamp(2rem,9vw,18rem)] hover:text-neon-green mr-8 md:mr-28"
           lang="en"
         >
           CONTACT
@@ -71,7 +71,7 @@ export default function Home({ homePage }: HomePageProps) {
       </Link>
       <Link href="/exclusive-designs">
         <h2
-          className="font-bold tracking-tight font-bison italic text-[clamp(0.5rem,5vw,8rem)] hover:text-neon-green ml-32 md:ml-84"
+          className="font-bold tracking-tight font-bison italic text-[clamp(0.5rem,5vw,8rem)] hover:text-neon-green ml-32 md:ml-72"
           lang="en"
         >
           EXCLUSIVE DESIGNS

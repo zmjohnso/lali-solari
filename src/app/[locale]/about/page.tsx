@@ -1,14 +1,13 @@
 import { getAboutPageData } from "@/lib/api";
-import { Locale } from "../../shared/types";
 import Image from "next/image";
+import { getContentfulLocale } from "@/src/shared/utilities";
 
 export default async function About({
   params,
 }: {
   params: { locale: string };
 }) {
-  const i18nLocale: Locale = params.locale === "en" ? "en-US" : "es";
-  const aboutPage = await getAboutPageData(i18nLocale);
+  const aboutPage = await getAboutPageData(getContentfulLocale(params.locale));
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { extractPhotoId } from "../shared/utilities";
 import { GalleryDisplayPageProps } from "./galleryDisplay";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "../navigation";
 
 export default function Gallery({
   mainPhoto,

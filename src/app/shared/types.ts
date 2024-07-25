@@ -1,1 +1,1 @@
-export type Locale = "en-US" | "es";
+export type ContentfulLocale = "en-US" | "es";

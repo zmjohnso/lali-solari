@@ -3,7 +3,7 @@
 import { PhotoWithId } from "@/lib/types";
 import Image from "next/image";
 import { usePhotoLoader } from "../hooks/usePhotoLoader";
-import Link from "next/link";
+import { Link } from "../navigation";
 
 interface PhotoGridItemProps {
   thumbnail: PhotoWithId;

@@ -2,8 +2,8 @@
 
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import LanguageDropdown from "./languageDropdown";
+import { Link } from "../navigation";
 
 export default function Header() {
   const pathname = usePathname();

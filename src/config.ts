@@ -5,14 +5,15 @@ export const locales = ["en", "es"] as const;
 
 export const pathnames: Pathnames<typeof locales> = {
   "/": "/",
-  "/pathnames": {
-    en: "/pathnames",
-    es: "/pfadnamen", // update this
+  "/manifesto": {
+    en: "/manifesto",
+    es: "/manifiesto",
   },
 };
 
 export const localePrefix: LocalePrefix<typeof locales> = "always";
 
+// TODO: update these env variables
 export const port = process.env.PORT || 3000;
 export const host = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
