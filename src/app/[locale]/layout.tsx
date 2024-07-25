@@ -1,3 +1,6 @@
+import "@fontsource/arimo";
+import "@fontsource/bebas-neue";
+import "@fontsource/open-sans";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
@@ -23,7 +26,7 @@ export async function generateMetadata({
   // const t = await getTranslations({ locale, namespace: "LocaleLayout" });
 
   return {
-    title: "some title", //t("title"),
+    title: "Lali Solari", //t("title"),
   };
 }
 

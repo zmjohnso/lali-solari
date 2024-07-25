@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "../navigation";
 
 const LanguageDropdown: React.FC = () => {
   const router = useRouter();
@@ -50,7 +50,7 @@ const LanguageDropdown: React.FC = () => {
       <button
         onClick={handleToggle}
         type="button"
-        className="flex items-center justify-center rounded-full hover:border-gray-300 pr-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+        className="p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100"
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-controls="dropdownMenu"

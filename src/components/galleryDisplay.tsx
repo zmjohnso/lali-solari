@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { GalleryItem } from "../../lib/types";
 import { usePhotoLoader } from "../hooks/usePhotoLoader";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
+import { useRouter } from "../navigation";
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem | undefined;

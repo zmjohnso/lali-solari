@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"); */
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-slide-in-right-fast {
+    animation: slideInFromRight 0.5s ease-in-out forwards;
+  }
+  .animate-slide-in-right-medium {
+    animation: slideInFromRight 1s ease-in-out forwards;
+  }
+  .animate-slide-in-right-slow {
+    animation: slideInFromRight 2s ease-in-out forwards;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-slide-in-left-fast {
+    animation: slideInFromLeft 0.5s ease-in-out forwards;
+  }
+  .animate-slide-in-left-medium {
+    animation: slideInFromLeft 1s ease-in-out forwards;
+  }
+  .animate-slide-in-left-slow {
+    animation: slideInFromLeft 2s ease-in-out forwards;
+  }
+}
