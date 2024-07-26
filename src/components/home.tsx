@@ -3,12 +3,17 @@ import { extractTitle } from "@/src/shared/utilities";
 import { MinimumHomePage } from "@/lib/types";
 import { Link } from "../navigation";
 import PhotoGridItem from "./photoGridItem";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 interface HomePageProps {
+  params: { locale: string };
   homePage: MinimumHomePage[];
 }
 
-export default function Home({ homePage }: HomePageProps) {
+export default function Home({ params, homePage }: HomePageProps) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
   const t = useTranslations("Home");
 
   const arPhotos = homePage.filter(
@@ -94,7 +99,7 @@ export default function Home({ homePage }: HomePageProps) {
           />
         ))}
       </div>
-      <Link href={`gallery/${rootsPhotos[0].thumbnail.sys.id}`}>
+      <Link href={`/gallery/${rootsPhotos[0].thumbnail.sys.id}`}>
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {rootsName}
         </h2>
@@ -107,7 +112,7 @@ export default function Home({ homePage }: HomePageProps) {
           />
         ))}
       </div>
-      <Link href={`gallery/${symbiosisPhotos[0].thumbnail.sys.id}`}>
+      <Link href={`/gallery/${symbiosisPhotos[0].thumbnail.sys.id}`}>
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {symbiosisName}
         </h2>
@@ -120,7 +125,7 @@ export default function Home({ homePage }: HomePageProps) {
           />
         ))}
       </div>
-      <Link href={`gallery/${pandemicPhotos[0].thumbnail.sys.id}`}>
+      <Link href={`/gallery/${pandemicPhotos[0].thumbnail.sys.id}`}>
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {pandemicName}
         </h2>

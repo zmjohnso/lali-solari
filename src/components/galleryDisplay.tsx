@@ -57,7 +57,7 @@ export default function GalleryDisplay({
         <h3 className="font-bold mb-8 text-[clamp(1rem,10vw,3rem)] font-open-sans">
           {collectionName}
         </h3>
-        <p className="flex self-center mb-8 w-80 md:w-2/4 md:ml-52 font-arimo">
+        <p className="flex self-center mb-8 w-80 md:w-2/4 ml-10 md:ml-52 font-arimo">
           {collectionDescription}
         </p>
         <div className="flex items-center mb-12">

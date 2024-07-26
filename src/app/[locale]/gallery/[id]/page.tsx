@@ -1,12 +1,16 @@
 import { getGalleryDisplayPageData } from "@/lib/api";
 import GalleryDisplay from "@/src/components/galleryDisplay";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export default async function Page({
   params,
 }: {
   params: { locale: string; id: string };
 }) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
   const galleryDisplayPage = await getGalleryDisplayPageData(
     getContentfulLocale(params.locale)
   );

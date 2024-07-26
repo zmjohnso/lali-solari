@@ -4,8 +4,13 @@ import "@fontsource/open-sans";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/src/components/header";
-import { getMessages } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  unstable_setRequestLocale,
+} from "next-intl/server";
 import { ReactNode } from "react";
+import { locales } from "@/src/config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +19,17 @@ type LocaleLayoutProps = {
   params: { locale: string };
 };
 
-export async function generateMetadata() {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: Omit<LocaleLayoutProps, "children">) {
+  const t = await getTranslations({ locale, namespace: "LocaleLayout" });
+
   return {
-    title: "Lali Solari",
+    title: t("title"),
   };
 }
 
@@ -29,15 +42,18 @@ export default async function LocaleLayout({
   children,
   params: { locale },
 }: Readonly<LocaleLayoutProps>) {
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
+
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body>
+      <body className={`${inter.className}`}>
         <NextIntlClientProvider messages={messages}>
-          <section className={`min-h-screen ${inter.className}`}>
+          <section className={`min-h-screen`}>
             <Header />
             <main>{children}</main>
           </section>

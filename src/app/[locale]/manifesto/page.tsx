@@ -1,11 +1,15 @@
 import { getManifestoPageData } from "@/lib/api";
 import { getContentfulLocale } from "@/src/shared/utilities";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export default async function Manifesto({
   params,
 }: {
   params: { locale: string };
 }) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
   const manifestoPage = await getManifestoPageData(
     getContentfulLocale(params.locale)
   );

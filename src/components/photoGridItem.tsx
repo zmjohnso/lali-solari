@@ -17,7 +17,7 @@ export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
   return (
     <div className="flex items-center justify-center">
       {imageLoaded ? (
-        <Link href={`gallery/${thumbnail.sys.id}`}>
+        <Link href={`/gallery/${thumbnail.sys.id}`}>
           <Image
             src={photoUrl}
             alt={photoTitle}

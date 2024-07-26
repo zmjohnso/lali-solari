@@ -1,12 +1,16 @@
 import { getAboutPageData } from "@/lib/api";
 import Image from "next/image";
 import { getContentfulLocale } from "@/src/shared/utilities";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export default async function About({
   params,
 }: {
   params: { locale: string };
 }) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
   const aboutPage = await getAboutPageData(getContentfulLocale(params.locale));
 
   return (

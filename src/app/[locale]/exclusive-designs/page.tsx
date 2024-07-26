@@ -1,4 +1,13 @@
-export default function ExclusiveDesigns() {
+import { unstable_setRequestLocale } from "next-intl/server";
+
+export default function ExclusiveDesigns({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  // Enable static rendering
+  unstable_setRequestLocale(params.locale);
+
   return (
     <div className="w-screen text-center">
       <h3
