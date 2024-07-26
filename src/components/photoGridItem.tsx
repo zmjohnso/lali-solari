@@ -9,7 +9,7 @@ interface PhotoGridItemProps {
   thumbnail: PhotoWithId;
 }
 
-export const PhotoGridItem: React.FC<PhotoGridItemProps> = ({ thumbnail }) => {
+export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
   const { imageLoaded } = usePhotoLoader(thumbnail);
   const photoUrl = thumbnail.url;
   const photoTitle = thumbnail.title;
@@ -35,4 +35,4 @@ export const PhotoGridItem: React.FC<PhotoGridItemProps> = ({ thumbnail }) => {
       )}
     </div>
   );
-};
+}

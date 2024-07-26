@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
 import { usePathname, useRouter } from "../navigation";
 
-const LanguageDropdown: React.FC = () => {
+export default function LanguageDropdown() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
@@ -37,9 +37,8 @@ const LanguageDropdown: React.FC = () => {
 
   const handleLanguageMode = (currentLanguage: string) => {
     const newRouteLanguage = currentLanguage === "English" ? "en" : "es";
-    const newUrl = pathname.replace(/^\/(en|es)/, `/${newRouteLanguage}`);
     startTransition(() => {
-      router.replace(newUrl);
+      router.replace(pathname, { locale: newRouteLanguage });
     });
   };
 
@@ -60,7 +59,7 @@ const LanguageDropdown: React.FC = () => {
 
       <div
         id="dropdownMenu"
-        className={`${isOpen ? "block" : "hidden"} origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5`}
+        className={`${isOpen ? "block" : "hidden"} origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50`}
       >
         <div
           className="py-1"
@@ -86,6 +85,4 @@ const LanguageDropdown: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default LanguageDropdown;
+}

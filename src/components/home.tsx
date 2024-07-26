@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { extractTitle } from "@/src/shared/utilities";
 import { MinimumHomePage } from "@/lib/types";
-import { PhotoGridItem } from "./photoGridItem";
 import { Link } from "../navigation";
+import PhotoGridItem from "./photoGridItem";
 
 interface HomePageProps {
   homePage: MinimumHomePage[];
