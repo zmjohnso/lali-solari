@@ -4,6 +4,8 @@ import { useForm, ValidationError } from "@formspree/react";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { useTranslations } from "next-intl";
 
+export const runtime = "edge";
+
 export default function Contact({ params }: { params: { locale: string } }) {
   const t = useTranslations("Contact");
   const [state, handleSubmit] = useForm(

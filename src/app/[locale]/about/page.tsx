@@ -3,6 +3,8 @@ import Image from "next/image";
 import { getContentfulLocale } from "@/src/shared/utilities";
 import { unstable_setRequestLocale } from "next-intl/server";
 
+export const runtime = "edge";
+
 export default async function About({
   params,
 }: {
