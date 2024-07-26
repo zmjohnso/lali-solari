@@ -86,7 +86,7 @@ export default function Home({ homePage }: HomePageProps) {
           {abstractReverberationsName}
         </h2>
       </Link>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-4">
         {arPhotos.map((photo) => (
           <PhotoGridItem
             key={photo.thumbnail.title}
@@ -99,7 +99,7 @@ export default function Home({ homePage }: HomePageProps) {
           {rootsName}
         </h2>
       </Link>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-4">
         {rootsPhotos.map((photo) => (
           <PhotoGridItem
             key={photo.thumbnail.title}
@@ -112,7 +112,7 @@ export default function Home({ homePage }: HomePageProps) {
           {symbiosisName}
         </h2>
       </Link>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-4">
         {symbiosisPhotos.map((photo) => (
           <PhotoGridItem
             key={photo.thumbnail.title}
@@ -125,7 +125,7 @@ export default function Home({ homePage }: HomePageProps) {
           {pandemicName}
         </h2>
       </Link>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-4">
         {pandemicPhotos.map((photo) => (
           <PhotoGridItem
             key={photo.thumbnail.title}

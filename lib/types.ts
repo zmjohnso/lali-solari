@@ -1,3 +1,4 @@
+export type ContentfulLocale = "en-US" | "es";
 export interface PhotoWithId {
   sys: {
     id: string;

@@ -23,9 +23,9 @@ export const PhotoGridItem: React.FC<PhotoGridItemProps> = ({ thumbnail }) => {
             alt={photoTitle}
             loading="lazy"
             className={`max-w-full ${imageLoaded ? "block" : "hidden"} max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105`}
-            // it seems that the width and height props are required for the image to display
+            // the width and height props are required for the image to display
             // but the width just needs to be large enough to fill the screen
-            // then in will scale based on the grid size
+            // then in will be responsive by default
             width={500}
             height={300}
           />

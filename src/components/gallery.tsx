@@ -44,7 +44,7 @@ export default function Gallery({
           aria-label="gallery photo back arrow"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+          className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
         >
           &#8592;
         </button>
@@ -53,7 +53,7 @@ export default function Gallery({
         <div className="grid grid-cols-5 gap-2">
           {visibleImages.map((item) => (
             <div key={item.thumbnail.title} className="flex items-center">
-              <Link href={`/gallery/${item.thumbnail.sys.id}`}>
+              <Link href={`/gallery/${item.thumbnail.sys.id}`} scroll={false}>
                 <Image
                   src={item.thumbnail.url}
                   alt={item.thumbnail.title}
@@ -71,7 +71,7 @@ export default function Gallery({
           aria-label="gallery photo forward arrow"
           onClick={handleNext}
           disabled={currentIndex >= galleryItems.length - itemsToShow}
-          className={`p-2 ${currentIndex >= galleryItems.length - itemsToShow ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+          className={`p-2 ${currentIndex >= galleryItems.length - itemsToShow ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
         >
           &#8594;
         </button>

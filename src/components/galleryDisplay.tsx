@@ -35,7 +35,8 @@ export default function GalleryDisplay({
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
       router.push(
-        `/gallery/${galleryItems[currentIndex - 1].thumbnail.sys.id}`
+        `/gallery/${galleryItems[currentIndex - 1].thumbnail.sys.id}`,
+        { scroll: false }
       );
     }
   };
@@ -44,7 +45,8 @@ export default function GalleryDisplay({
     if (currentIndex < galleryItems.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       router.push(
-        `/gallery/${galleryItems[currentIndex + 1].thumbnail.sys.id}`
+        `/gallery/${galleryItems[currentIndex + 1].thumbnail.sys.id}`,
+        { scroll: false }
       );
     }
   };
@@ -52,35 +54,37 @@ export default function GalleryDisplay({
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
       <div className="mb-20">
-        <h3 className="font-bold mb-16 text-[clamp(1rem, 10vw, 3rem)] font-open-sans">
+        <h3 className="font-bold mb-8 text-[clamp(1rem,10vw,3rem)] font-open-sans">
           {collectionName}
         </h3>
-        <p className="text-center mb-12 w-88 md:w-120 font-arimo">
+        <p className="flex self-center mb-8 w-80 md:w-2/4 md:ml-52 font-arimo">
           {collectionDescription}
         </p>
-        <div className="flex items-center mb-12 space-x-4">
+        <div className="flex items-center mb-12">
           <button
             aria-label="main display photo back arrow"
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+            className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
           >
             &#8592;
           </button>
-          <div className="relative w-full">
+          <div className="w-full">
             {imageLoaded ? (
-              <TransformWrapper>
-                <TransformComponent>
-                  <Image
-                    className="w-full h-auto"
-                    src={mainPhotoUrl ?? ""}
-                    alt={mainPhotoTitle ?? ""}
-                    loading="lazy"
-                    width={2000}
-                    height={500}
-                  />
-                </TransformComponent>
-              </TransformWrapper>
+              <div className="w-full h-auto">
+                <TransformWrapper>
+                  <TransformComponent>
+                    <Image
+                      src={mainPhotoUrl ?? ""}
+                      alt={mainPhotoTitle ?? ""}
+                      width={2000}
+                      height={500}
+                      priority
+                      className={`${imageLoaded ? "block" : "hidden"}`}
+                    />
+                  </TransformComponent>
+                </TransformWrapper>
+              </div>
             ) : (
               <div className="w-full h-auto bg-gray-200 animate-pulse pt-[75%]" />
             )}
@@ -94,7 +98,7 @@ export default function GalleryDisplay({
             aria-label="main display photo forward arrow"
             onClick={handleNext}
             disabled={currentIndex >= galleryItems.length - 1}
-            className={`p-2 ${currentIndex >= galleryItems.length - 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+            className={`p-2 ${currentIndex >= galleryItems.length - 1 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
           >
             &#8594;
           </button>

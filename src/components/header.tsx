@@ -18,21 +18,21 @@ export default function Header() {
         >
           <Link href="/">
             <h4
-              className={`font-bold font-bison ${isHomePage ? "text-[clamp(1rem,6vw,10rem)]" : "text-[clamp(1rem,6vw,4rem)]"}`}
+              className={`font-bold tracking-tight font-bison pl-6 ${isHomePage ? "text-[clamp(1rem,6vw,10rem)]" : "text-[clamp(1rem,6vw,2.5rem)]"}`}
             >
               LALI SOLARI
             </h4>
           </Link>
           <Link href="/">
             <p
-              className="font-open-sans text-[clamp(0.65rem,1.25vw,6rem)]"
+              className="font-open-sans pl-4 text-[clamp(0.65rem,1.25vw,6rem)]"
               lang="en"
             >
               FINE ARTS & EXCLUSIVE DESIGNS
             </p>
           </Link>
         </div>
-        <div className="flex flex-row sm:pr-0 md:pr-2">
+        <div className="flex flex-row pr-2 md:pr-4">
           <LanguageDropdown />
           <a
             href="https://www.instagram.com/lalisolariart/"

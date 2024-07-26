@@ -1,6 +1,6 @@
 import { getGalleryDisplayPageData } from "@/lib/api";
 import GalleryDisplay from "@/src/components/galleryDisplay";
-import { getContentfulLocale } from "@/src/shared/utilities";
+import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
 
 export default async function Page({
   params,
@@ -16,6 +16,11 @@ export default async function Page({
   const galleryItems = galleryDisplayPage.filter(
     (item) => item.gallery.name === mainPhoto?.gallery.name
   );
+  const sortedGalleryItems = galleryItems.sort(
+    (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
+  );
 
-  return <GalleryDisplay mainPhoto={mainPhoto} galleryItems={galleryItems} />;
+  return (
+    <GalleryDisplay mainPhoto={mainPhoto} galleryItems={sortedGalleryItems} />
+  );
 }

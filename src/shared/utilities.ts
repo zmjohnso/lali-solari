@@ -1,4 +1,4 @@
-import { ContentfulLocale } from "../app/shared/types";
+import { ContentfulLocale } from "@/lib/types";
 
 export const extractPhotoId = (input: string): number => {
   // Split the string by spaces and get the last item

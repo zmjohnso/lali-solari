@@ -1,11 +1,19 @@
 import { getMinimumHomePageData } from "@/lib/api";
 import Home from "@/src/components/home";
-import { getContentfulLocale } from "@/src/shared/utilities";
+import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
 
-export default async function Page({ params }: { params: { locale: string } }) {
+export default async function RootPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const homePage = await getMinimumHomePageData(
     getContentfulLocale(params.locale)
   );
 
-  return <Home homePage={homePage} />;
+  const sortedItems = homePage.sort(
+    (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
+  );
+
+  return <Home homePage={sortedItems} />;
 }

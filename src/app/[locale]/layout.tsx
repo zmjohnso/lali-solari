@@ -1,32 +1,22 @@
 import "@fontsource/arimo";
 import "@fontsource/bebas-neue";
 import "@fontsource/open-sans";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/src/components/header";
-import { locales } from "@/src/config";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-type Props = {
+type LocaleLayoutProps = {
   children: ReactNode;
   params: { locale: string };
 };
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({
-  params: { locale },
-}: Omit<Props, "children">) {
-  // const t = await getTranslations({ locale, namespace: "LocaleLayout" });
-
+export async function generateMetadata() {
   return {
-    title: "Lali Solari", //t("title"),
+    title: "Lali Solari",
   };
 }
 
@@ -38,7 +28,7 @@ export async function generateMetadata({
 export default async function LocaleLayout({
   children,
   params: { locale },
-}: Readonly<Props>) {
+}: Readonly<LocaleLayoutProps>) {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();

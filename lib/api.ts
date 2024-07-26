@@ -6,8 +6,8 @@ import {
   GalleryItemResponse,
   AboutPageResponse,
   ManifestoPageResponse,
+  ContentfulLocale,
 } from "./types";
-import { ContentfulLocale } from "@/src/app/shared/types";
 
 const MANIFESTO_PAGE_QUERY = `
   query ($locale: String!) {
