@@ -58,8 +58,8 @@ export default function Gallery({
                   src={item.thumbnail.url}
                   alt={item.thumbnail.title}
                   className="w-full transition-transform duration-300 hover:scale-105"
-                  width={150}
-                  height={150}
+                  width={2025}
+                  height={2025}
                 />
               </Link>
             </div>

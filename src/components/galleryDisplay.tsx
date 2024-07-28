@@ -7,6 +7,7 @@ import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
 import { useRouter } from "../navigation";
+import { useTranslations } from "next-intl";
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem | undefined;
@@ -17,6 +18,7 @@ export default function GalleryDisplay({
   mainPhoto,
   galleryItems,
 }: GalleryDisplayPageProps) {
+  const t = useTranslations("Home");
   const router = useRouter();
   const { imageLoaded } = usePhotoLoader(mainPhoto?.photo);
   const [currentIndex, setCurrentIndex] = useState(
@@ -30,6 +32,27 @@ export default function GalleryDisplay({
   const mainPhotoUrl = mainPhoto?.photo.url;
   const mainPhotoTitle = mainPhoto?.photo.title;
   const mainPhotoPaintingData = mainPhoto?.paintingData;
+
+  let mainPhotoWidth = 1280;
+  let mainPhotoHeight = 1250;
+  switch (collectionName?.toLowerCase()) {
+    case t("abstractReverberations").toLowerCase():
+      mainPhotoWidth = 1280;
+      mainPhotoHeight = 860;
+      break;
+    case t("roots").toLowerCase():
+      mainPhotoWidth = 3100;
+      mainPhotoHeight = 3100;
+      break;
+    case t("symbiosis").toLowerCase():
+      mainPhotoWidth = 1280;
+      mainPhotoHeight = 1275;
+      break;
+    case t("pandemic").toLowerCase():
+      mainPhotoWidth = 1280;
+      mainPhotoHeight = 1250;
+      break;
+  }
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
@@ -77,8 +100,8 @@ export default function GalleryDisplay({
                     <Image
                       src={mainPhotoUrl ?? ""}
                       alt={mainPhotoTitle ?? ""}
-                      width={2000}
-                      height={500}
+                      width={mainPhotoWidth}
+                      height={mainPhotoHeight}
                       priority
                       className={`${imageLoaded ? "block" : "hidden"}`}
                     />

@@ -60,7 +60,7 @@ export default function Home({ params, homePage }: HomePageProps) {
           className="content-end"
         >
           <h2
-            className="font-bold font-bison italic text-[clamp(2rem,11vw,18rem)] hover:text-neon-green animate-slide-in-right-fast"
+            className="font-bold font-bison italic text-[clamp(2rem,16vw,18rem)] hover:text-neon-green animate-slide-in-right-fast"
             lang="en"
           >
             GALLERY

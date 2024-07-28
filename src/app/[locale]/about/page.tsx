@@ -31,6 +31,7 @@ export default async function About({
             <Image
               src={item.url}
               alt={item.title}
+              // optimize these values once final images are uploaded
               width={300}
               height={300}
               className="w-full h-full object-cover"

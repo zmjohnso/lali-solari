@@ -23,11 +23,10 @@ export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
             alt={photoTitle}
             loading="lazy"
             className={`max-w-full ${imageLoaded ? "block" : "hidden"} max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105`}
-            // the width and height props are required for the image to display
-            // but the width just needs to be large enough to fill the screen
-            // then in will be responsive by default
-            width={500}
-            height={300}
+            // all thumbnails in Contentful are 2025x2025
+            // this is needed for the prerendering, then it will be responsive by default
+            width={2025}
+            height={2025}
           />
         </Link>
       ) : (
