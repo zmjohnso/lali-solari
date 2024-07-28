@@ -91,8 +91,7 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
 
 async function fetchGraphQL<T>(
   query: string,
-  variables: Record<string, any>,
-  tag = ""
+  variables: Record<string, any>
 ): Promise<T> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
@@ -105,7 +104,7 @@ async function fetchGraphQL<T>(
       body: JSON.stringify({ query, variables }),
       // Associate all fetches with some cache tag so content can
       // be revalidated or updated from Contentful on publish
-      next: { tags: [tag] },
+      next: { tags: ["portfolioContent"] },
     }
   ).then((response) => response.json());
 }
@@ -114,8 +113,7 @@ export async function getManifestoPageData(lang: ContentfulLocale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<ManifestoPageResponse>(
     MANIFESTO_PAGE_QUERY,
-    variables,
-    "manifesto"
+    variables
   );
   // there should only ever be one manifesto page, so we return the first item
   return data.data.manifiestoCollection.items[0];
@@ -125,8 +123,7 @@ export async function getAboutPageData(lang: ContentfulLocale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<AboutPageResponse>(
     ABOUT_PAGE_QUERY,
-    variables,
-    "about"
+    variables
   );
   // there should only ever be one about page, so we return the first item
   return data.data.aboutCollection.items[0];
@@ -138,8 +135,7 @@ export async function getMinimumHomePageData(
   const variables = { locale: lang };
   const data = await fetchGraphQL<MinimumHomePageResponse>(
     MINIMUM_HOME_PAGE_QUERY,
-    variables,
-    "minimumHomePage"
+    variables
   );
   return data.data.minimumHomePageCollection.items;
 }
@@ -150,8 +146,7 @@ export async function getGalleryDisplayPageData(
   const variables = { locale: lang };
   const data = await fetchGraphQL<GalleryItemResponse>(
     GALLERY_DISPLAY_PAGE_QUERY,
-    variables,
-    "galleryPhoto"
+    variables
   );
   return data.data.galleryPhotoCollection.items;
 }
