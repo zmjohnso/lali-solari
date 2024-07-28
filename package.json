@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fontsource/arimo": "^5.0.20",
-    "@fontsource/bebas-neue": "^5.0.20",
-    "@fontsource/open-sans": "^5.0.28",
     "@formspree/react": "^2.5.1",
     "@react-icons/all-files": "^4.1.0",
     "next": "14.2.5",

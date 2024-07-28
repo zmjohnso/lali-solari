@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        "open-sans": ["Open Sans", "sans-serif"],
-        arimo: ["Arimo", "sans-serif"],
-        bison: ["Bison", "sans-serif"],
-        bebas: ["Bebas Neue", "sans-serif"],
+        "open-sans": ["var(--font-open-sans)"],
+        arimo: ["var(--font-arimo)"],
+        bebas: ["var(--font-bebas-neue)"],
+        bison: ["var(--font-bison)"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

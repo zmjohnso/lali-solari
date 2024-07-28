@@ -1,7 +1,5 @@
-import "@fontsource/arimo";
-import "@fontsource/bebas-neue";
-import "@fontsource/open-sans";
-import { Inter } from "next/font/google";
+import { Arimo, Bebas_Neue, Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/src/components/header";
 import {
@@ -12,7 +10,22 @@ import {
 import { ReactNode } from "react";
 import { locales } from "@/src/config";
 
-const inter = Inter({ subsets: ["latin"] });
+const arimo = Arimo({ subsets: ["latin"], variable: "--font-arimo" });
+const bebassNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas-neue",
+});
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+});
+
+const bison = localFont({
+  src: "../../fonts/Bison-Bold.ttf",
+  display: "swap",
+  variable: "--font-bison",
+});
 
 type LocaleLayoutProps = {
   children: ReactNode;
@@ -51,7 +64,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${inter.className}`}>
+      <body
+        className={`${arimo.variable} ${bebassNeue.variable} ${openSans.variable} ${bison.variable}`}
+      >
         <NextIntlClientProvider messages={messages}>
           <section className={`min-h-screen`}>
             <Header />

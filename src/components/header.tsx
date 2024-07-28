@@ -18,7 +18,7 @@ export default function Header() {
         >
           <Link href="/">
             <h4
-              className={`font-bold tracking-tight font-bison pl-6 ${isHomePage ? "text-[clamp(1rem,6vw,10rem)]" : "text-[clamp(1rem,6vw,2.5rem)]"}`}
+              className={`font-bold tracking-tight font-bison pl-6 ${isHomePage ? "text-[clamp(2rem,6vw,10rem)]" : "text-[clamp(1rem,6vw,4rem)]"}`}
             >
               LALI SOLARI
             </h4>

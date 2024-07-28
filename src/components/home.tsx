@@ -77,17 +77,14 @@ export default function Home({ params, homePage }: HomePageProps) {
       </Link>
       <Link href="/exclusive-designs">
         <h2
-          className="font-bold font-bison tracking-tighter italic text-[clamp(0.5rem,6vw,8rem)] hover:text-neon-green ml-28 md:ml-72 animate-slide-in-right-medium"
+          className="font-bold font-bison italic text-[clamp(0.5rem,6vw,8rem)] hover:text-neon-green ml-28 md:ml-72 animate-slide-in-right-medium"
           lang="en"
         >
           EXCLUSIVE DESIGNS
         </h2>
       </Link>
       <Link href={`/gallery/${arPhotos[0].thumbnail.sys.id}`}>
-        <h2
-          className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mb-1 mt-6"
-          style={{ fontFamily: "Bebas Neue" }}
-        >
+        <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mb-1 mt-6">
           {abstractReverberationsName}
         </h2>
       </Link>
