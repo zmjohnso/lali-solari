@@ -24,6 +24,10 @@
   "Error": {
     "title": "¡Vaya! Algo salió mal.",
     "body": "No pudimos encontrar la página que estabas buscando. Puede que haya sido eliminada, o tal vez escribiste mal la dirección.",
-    "backHome": "Volver a Inicio"
+    "retry": "Intentar de nuevo"
+  },
+  "NotFound": {
+    "description": "Lo siento, la página que estás buscando no se puede encontrar.",
+    "back": "Volver a la página principal"
   }
 }

@@ -70,7 +70,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <section className={`min-h-screen`}>
             <Header />
-            <main>{children}</main>
+            {children}
           </section>
         </NextIntlClientProvider>
       </body>

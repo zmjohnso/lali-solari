@@ -24,6 +24,10 @@
   "Error": {
     "title": "Oops! Something went wrong.",
     "body": "We couldn't find the page you were looking for. It might have been removed, or you may have mistyped the address.",
-    "backHome": "Back to Home"
+    "retry": "Try again"
+  },
+  "NotFound": {
+    "description": "Sorry, the page you're looking for cannot be found.",
+    "back": "Go back home"
   }
 }
