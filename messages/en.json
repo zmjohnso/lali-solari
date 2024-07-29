@@ -29,5 +29,9 @@
   "NotFound": {
     "description": "Sorry, the page you're looking for cannot be found.",
     "back": "Go back home"
+  },
+  "ExclusiveDesigns": {
+    "title": "Exclusive Designs",
+    "description": "Coming Soon"
   }
 }

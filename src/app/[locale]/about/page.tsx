@@ -17,7 +17,7 @@ export default async function About({
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
-      <h3 className="font-bold mb-4 text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">
+      <h3 className="mb-4 text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">
         {aboutPage.title}
       </h3>
 

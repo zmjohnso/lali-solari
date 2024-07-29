@@ -18,7 +18,7 @@ export default function Contact({ params }: { params: { locale: string } }) {
   return (
     <div className="max-w-screen-sm mx-auto mt-8 px-4">
       <div className="flex flex-col items-center text-center mb-4">
-        <h3 className="font-bold text-[clamp(1rem,10vw,3rem)] font-open-sans mb-5">
+        <h3 className="text-[clamp(1rem,10vw,3rem)] font-open-sans mb-5">
           {t("title")}
         </h3>
         <div className="flex items-center mb-6">
