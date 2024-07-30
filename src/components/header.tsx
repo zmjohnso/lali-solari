@@ -1,8 +1,8 @@
 "use client";
 
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
-import { FaHome } from "@react-icons/all-files/fa/FaHome";
 import LanguageDropdown from "./languageDropdown";
+import { FaHome } from "@react-icons/all-files/fa/FaHome";
 import { Link, usePathname } from "../navigation";
 
 export default function Header() {
@@ -12,7 +12,9 @@ export default function Header() {
 
   return (
     <header className="flex flex-col bg-transparent shadow-none py-2">
-      <div className="flex justify-between items-center">
+      <div
+        className={`flex justify-between items-center ${!isHomePage ? "pl-4" : "pl-0"}`}
+      >
         {isHomePage && <div>{/* empty div for spacing */}</div>}
         <div
           className={`flex flex-col items-center ${isHomePage ? "pl-20" : "pl-0"}`}
