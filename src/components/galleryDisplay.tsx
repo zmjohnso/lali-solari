@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { GalleryItem } from "../../lib/types";
-import { usePhotoLoader } from "../hooks/usePhotoLoader";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
@@ -20,7 +19,6 @@ export default function GalleryDisplay({
 }: GalleryDisplayPageProps) {
   const t = useTranslations("Home");
   const router = useRouter();
-  const { imageLoaded } = usePhotoLoader(mainPhoto?.photo);
   const [currentIndex, setCurrentIndex] = useState(
     galleryItems.findIndex(
       (item) => item.thumbnail.sys.id === mainPhoto?.thumbnail.sys.id
@@ -93,24 +91,21 @@ export default function GalleryDisplay({
             &#8592;
           </button>
           <div className="w-full">
-            {imageLoaded ? (
-              <div className="w-full h-auto">
-                <TransformWrapper>
-                  <TransformComponent>
-                    <Image
-                      src={mainPhotoUrl ?? ""}
-                      alt={mainPhotoTitle ?? ""}
-                      width={mainPhotoWidth}
-                      height={mainPhotoHeight}
-                      priority
-                      className={`${imageLoaded ? "block" : "hidden"}`}
-                    />
-                  </TransformComponent>
-                </TransformWrapper>
-              </div>
-            ) : (
-              <div className="w-full h-auto bg-gray-200 animate-pulse pt-[75%]" />
-            )}
+            <div className="w-full h-auto">
+              <TransformWrapper>
+                <TransformComponent>
+                  <Image
+                    src={mainPhotoUrl ?? ""}
+                    alt={mainPhotoTitle ?? ""}
+                    width={mainPhotoWidth}
+                    height={mainPhotoHeight}
+                    placeholder="blur"
+                    blurDataURL="/placeholder.png"
+                    priority
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </div>
             {mainPhotoPaintingData && (
               <span className="text-xs flex justify-end mt-2 pr-4 font-arimo">
                 {mainPhotoPaintingData.size} {mainPhotoPaintingData.technique}

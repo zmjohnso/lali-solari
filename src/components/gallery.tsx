@@ -60,6 +60,8 @@ export default function Gallery({
                   className="w-full transition-transform duration-300 hover:scale-105"
                   width={2025}
                   height={2025}
+                  placeholder="blur"
+                  blurDataURL="/placeholder.png"
                 />
               </Link>
             </div>
