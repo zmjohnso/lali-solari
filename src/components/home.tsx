@@ -40,7 +40,7 @@ export default function Home({ params, homePage }: HomePageProps) {
   return (
     <div className="flex flex-col justify-center items-center px-4 md:px-8 mb-4">
       <Link href="/manifesto">
-        <h1 className="font-bold font-bebas uppercase text-[clamp(2rem,18vw,20rem)] hover:text-neon-green -mb-4 md:-mb-12 ml-20 md:ml-32 animate-slide-in-right-slow">
+        <h1 className="font-bold font-bebas uppercase -mt-3 text-[clamp(2rem,18vw,20rem)] hover:text-neon-green -mb-4 md:-mb-12 ml-20 md:ml-32 animate-slide-in-right-slow">
           {t("manifesto")}
         </h1>
       </Link>
