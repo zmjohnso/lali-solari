@@ -3,8 +3,6 @@ import Home from "@/src/components/home";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-export const runtime = "edge";
-
 export default async function RootPage({
   params,
 }: {

@@ -1,8 +1,6 @@
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-export const runtime = "edge";
-
 export default function ExclusiveDesigns({
   params,
 }: {
