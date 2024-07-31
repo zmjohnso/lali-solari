@@ -1,5 +1,5 @@
+import withPlaiceholder from "@plaiceholder/next";
 import nextIntl from "next-intl/plugin";
-
 const withNextIntl = nextIntl("./src/i18n.ts");
 
 /** @type {import('next').NextConfig} */
@@ -16,4 +16,4 @@ const config = {
   },
 };
 
-export default withNextIntl(config);
+export default withPlaiceholder(withNextIntl(config));

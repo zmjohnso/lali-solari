@@ -10,11 +10,13 @@ import { useTranslations } from "next-intl";
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem | undefined;
+  mainPhotoBlurUrl: string | undefined;
   galleryItems: GalleryItem[];
 }
 
 export default function GalleryDisplay({
   mainPhoto,
+  mainPhotoBlurUrl,
   galleryItems,
 }: GalleryDisplayPageProps) {
   const t = useTranslations("Home");
@@ -100,7 +102,7 @@ export default function GalleryDisplay({
                     width={mainPhotoWidth}
                     height={mainPhotoHeight}
                     placeholder="blur"
-                    blurDataURL="/placeholder.png"
+                    blurDataURL={mainPhotoBlurUrl}
                     priority
                   />
                 </TransformComponent>

@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { extractPhotoId } from "../shared/utilities";
-import { GalleryDisplayPageProps } from "./galleryDisplay";
 import Image from "next/image";
 import { Link } from "../navigation";
+import { GalleryItem } from "@/lib/types";
 
-export default function Gallery({
-  mainPhoto,
-  galleryItems,
-}: GalleryDisplayPageProps) {
+export interface GalleryProps {
+  mainPhoto: GalleryItem | undefined;
+  galleryItems: GalleryItem[];
+}
+
+export default function Gallery({ mainPhoto, galleryItems }: GalleryProps) {
   const itemsToShow = 5;
 
   const photoId = extractPhotoId(mainPhoto?.title || "");
@@ -60,8 +62,8 @@ export default function Gallery({
                   className="w-full transition-transform duration-300 hover:scale-105"
                   width={2025}
                   height={2025}
-                  placeholder="blur"
-                  blurDataURL="/placeholder.png"
+                  // placeholder="blur"
+                  // blurDataURL={item.thumbnail.blurUrl}
                 />
               </Link>
             </div>
