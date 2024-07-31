@@ -2,7 +2,6 @@
 
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import LanguageDropdown from "./languageDropdown";
-import { FaHome } from "@react-icons/all-files/fa/FaHome";
 import { Link, usePathname } from "../navigation";
 
 export default function Header() {
@@ -36,16 +35,6 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex flex-row pr-2 md:pr-4">
-          {!isHomePage && (
-            <Link href="/">
-              <button
-                aria-label="home link button"
-                className="p-2 rounded-full bg-white text-gray-500 hover:bg-gray-100"
-              >
-                <FaHome size={23} />
-              </button>
-            </Link>
-          )}
           <LanguageDropdown />
           <a
             href="https://www.instagram.com/lalisolariart/"

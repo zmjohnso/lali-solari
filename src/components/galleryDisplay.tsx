@@ -5,7 +5,7 @@ import { GalleryItem } from "../../lib/types";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
-import { useRouter } from "../navigation";
+import { Link, useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
 
 export interface GalleryDisplayPageProps {
@@ -128,6 +128,11 @@ export default function GalleryDisplay({
           mainPhoto={mainPhoto}
           galleryItems={galleryItems}
         />
+        <Link href="/">
+          <h3 className="flex justify-end pt-8 pr-8 font-bison font-bold italic text-7xl">
+            {t("back")}
+          </h3>
+        </Link>
       </div>
     </div>
   );
