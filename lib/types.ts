@@ -5,6 +5,7 @@ export interface PhotoWithId {
   };
   title: string;
   url: string;
+  blurUrl?: string;
 }
 
 export interface MinimumPhoto {
