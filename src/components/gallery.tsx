@@ -62,8 +62,8 @@ export default function Gallery({ mainPhoto, galleryItems }: GalleryProps) {
                   className="w-full transition-transform duration-300 hover:scale-105"
                   width={2025}
                   height={2025}
-                  placeholder="blur"
-                  blurDataURL={item.thumbnail.blurUrl}
+                  // placeholder="blur"
+                  // blurDataURL={item.thumbnail.blurUrl}
                 />
               </Link>
             </div>

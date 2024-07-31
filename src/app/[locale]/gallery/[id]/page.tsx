@@ -1,7 +1,6 @@
 import { getGalleryDisplayPageData } from "@/lib/api";
 import GalleryDisplay from "@/src/components/galleryDisplay";
 import getBase64 from "@/src/shared/getBase64";
-import getBase64Images from "@/src/shared/getBase64Images";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
 import { unstable_setRequestLocale } from "next-intl/server";
 
@@ -30,12 +29,12 @@ export default async function Page({
     ? await getBase64(mainPhoto.photo.url)
     : undefined;
 
-  const galleryItemsBlurUrls = await getBase64Images(sortedGalleryItems);
+  // const galleryItemsBlurUrls = await getBase64Images(sortedGalleryItems);
 
   // copy the blurUrl into the sortedGalleryItems
-  sortedGalleryItems.forEach(
-    (item, i) => (item.thumbnail.blurUrl = galleryItemsBlurUrls[i].blurUrl)
-  );
+  // sortedGalleryItems.forEach(
+  //   (item, i) => (item.thumbnail.blurUrl = galleryItemsBlurUrls[i].blurUrl)
+  // );
 
   return (
     <GalleryDisplay
