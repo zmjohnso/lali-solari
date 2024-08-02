@@ -16,7 +16,7 @@ export default async function Manifesto({
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
-      <h3 className="mb-4 text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">
+      <h3 className="mb-4 font-bold text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">
         {manifestoPage.title}
       </h3>
       <div className="w-[22rem] md:w-[50rem] mb-3 md:pl-56 font-arimo">
