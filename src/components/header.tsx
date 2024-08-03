@@ -3,6 +3,7 @@
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import LanguageDropdown from "./languageDropdown";
 import { Link, usePathname } from "../navigation";
+import clsx from "clsx";
 
 export default function Header() {
   const pathname = usePathname();
@@ -12,15 +13,24 @@ export default function Header() {
   return (
     <header className="flex flex-col bg-transparent shadow-none py-2">
       <div
-        className={`flex justify-between items-center ${!isHomePage ? "pl-4" : "pl-0"}`}
+        className={clsx("flex justify-between items-center", {
+          "pl-4": !isHomePage,
+          "pl-0": isHomePage,
+        })}
       >
         {isHomePage && <div>{/* empty div for spacing */}</div>}
         <div
-          className={`flex flex-col items-center ${isHomePage ? "pl-20" : "pl-0"}`}
+          className={clsx("flex flex-col items-center", {
+            "pl-20": isHomePage,
+            "pl-0": !isHomePage,
+          })}
         >
           <Link href="/">
             <h4
-              className={`font-bold font-bison ${isHomePage ? "text-[clamp(2rem,6vw,10rem)]" : "text-[clamp(1rem,6vw,4rem)]"}`}
+              className={clsx("font-bold font-bison", {
+                "text-[clamp(2rem,6vw,10rem)]": isHomePage,
+                "text-[clamp(1rem,6vw,4rem)]": !isHomePage,
+              })}
             >
               LALI SOLARI
             </h4>

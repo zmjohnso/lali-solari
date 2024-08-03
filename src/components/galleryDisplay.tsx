@@ -7,6 +7,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
 import { Link, useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem | undefined;
@@ -88,7 +89,10 @@ export default function GalleryDisplay({
             aria-label="main display photo back arrow"
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
+            className={clsx("p-2", {
+              "opacity-50 cursor-not-allowed": currentIndex === 0,
+              "rounded-full hover:bg-gray-100": currentIndex !== 0,
+            })}
           >
             &#8592;
           </button>
@@ -118,7 +122,12 @@ export default function GalleryDisplay({
             aria-label="main display photo forward arrow"
             onClick={handleNext}
             disabled={currentIndex >= galleryItems.length - 1}
-            className={`p-2 ${currentIndex >= galleryItems.length - 1 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
+            className={clsx("p-2", {
+              "opacity-50 cursor-not-allowed":
+                currentIndex >= galleryItems.length - 1,
+              "rounded-full hover:bg-gray-100":
+                currentIndex < galleryItems.length - 1,
+            })}
           >
             &#8594;
           </button>

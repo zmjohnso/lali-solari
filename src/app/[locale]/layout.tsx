@@ -68,7 +68,7 @@ export default async function LocaleLayout({
         className={`${arimo.variable} ${bebassNeue.variable} ${openSans.variable} ${bison.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
-          <section className={`min-h-screen`}>
+          <section className="min-h-screen">
             <Header />
             {children}
           </section>

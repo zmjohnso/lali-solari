@@ -5,6 +5,7 @@ import { extractPhotoId } from "../shared/utilities";
 import Image from "next/image";
 import { Link } from "../navigation";
 import { GalleryItem } from "@/lib/types";
+import clsx from "clsx";
 
 export interface GalleryProps {
   mainPhoto: GalleryItem | undefined;
@@ -46,7 +47,10 @@ export default function Gallery({ mainPhoto, galleryItems }: GalleryProps) {
           aria-label="gallery photo back arrow"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className={`p-2 ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
+          className={clsx("p-2", {
+            "opacity-50 cursor-not-allowed": currentIndex === 0,
+            "rounded-full hover:bg-gray-100": currentIndex !== 0,
+          })}
         >
           &#8592;
         </button>
@@ -75,7 +79,12 @@ export default function Gallery({ mainPhoto, galleryItems }: GalleryProps) {
           aria-label="gallery photo forward arrow"
           onClick={handleNext}
           disabled={currentIndex >= galleryItems.length - itemsToShow}
-          className={`p-2 ${currentIndex >= galleryItems.length - itemsToShow ? "opacity-50 cursor-not-allowed" : "rounded-full hover:bg-gray-100"}`}
+          className={clsx("p-2", {
+            "opacity-50 cursor-not-allowed":
+              currentIndex >= galleryItems.length - itemsToShow,
+            "rounded-full hover:bg-gray-100":
+              currentIndex < galleryItems.length - itemsToShow,
+          })}
         >
           &#8594;
         </button>

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
 import { usePathname, useRouter } from "../navigation";
+import clsx from "clsx";
 
 export default function LanguageDropdown() {
   const router = useRouter();
@@ -59,7 +60,13 @@ export default function LanguageDropdown() {
 
       <div
         id="dropdownMenu"
-        className={`${isOpen ? "block" : "hidden"} origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50`}
+        className={clsx(
+          "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50",
+          {
+            block: isOpen,
+            hidden: !isOpen,
+          }
+        )}
       >
         <div
           className="py-1"
