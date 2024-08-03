@@ -11,7 +11,6 @@ export default function Contact({ params }: { params: { locale: string } }) {
   );
 
   const emailAddress = "hola@lalisolari.com";
-  const requiredErrorMessage = t("required");
 
   return (
     <div className="max-w-screen-sm mx-auto mt-8 px-4">
