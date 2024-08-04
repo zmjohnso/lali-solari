@@ -9,6 +9,14 @@ export const pathnames: Pathnames<typeof locales> = {
     en: "/about",
     es: "/about",
   },
+  "/contact": {
+    en: "/contact",
+    es: "/contact",
+  },
+  "/exclusive-designs": {
+    en: "/exclusive-designs",
+    es: "/exclusive-designs",
+  },
   "/manifesto": {
     en: "/manifesto",
     es: "/manifiesto",
