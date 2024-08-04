@@ -24,17 +24,9 @@ export default async function Page({
   const sortedGalleryItems = galleryItems.sort(
     (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
   );
-
   const mainPhotoBlurUrl = mainPhoto?.photo.url
     ? await getBase64(mainPhoto.photo.url)
     : undefined;
-
-  // const galleryItemsBlurUrls = await getBase64Images(sortedGalleryItems);
-
-  // copy the blurUrl into the sortedGalleryItems
-  // sortedGalleryItems.forEach(
-  //   (item, i) => (item.thumbnail.blurUrl = galleryItemsBlurUrls[i].blurUrl)
-  // );
 
   return (
     <GalleryDisplay

@@ -19,5 +19,5 @@ export default async function RootPage({
     (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
   );
 
-  return <Home homePage={sortedItems} params={params} />;
+  return <Home homePage={sortedItems} />;
 }

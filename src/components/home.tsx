@@ -3,17 +3,12 @@ import { extractTitle } from "@/src/shared/utilities";
 import { MinimumHomePage } from "@/lib/types";
 import { Link } from "../navigation";
 import PhotoGridItem from "./photoGridItem";
-import { unstable_setRequestLocale } from "next-intl/server";
 
 interface HomePageProps {
-  params: { locale: string };
   homePage: MinimumHomePage[];
 }
 
-export default function Home({ params, homePage }: HomePageProps) {
-  // Enable static rendering
-  unstable_setRequestLocale(params.locale);
-
+export default function Home({ homePage }: HomePageProps) {
   const t = useTranslations("Home");
 
   const arPhotos = homePage.filter(
