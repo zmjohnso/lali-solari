@@ -20,7 +20,6 @@ const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-open-sans",
 });
-
 const bison = localFont({
   src: "../../fonts/Bison-Bold.ttf",
   display: "swap",
