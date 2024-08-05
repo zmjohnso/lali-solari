@@ -10,8 +10,8 @@ import { useTranslations } from "next-intl";
 import clsx from "clsx";
 
 export interface GalleryDisplayPageProps {
-  mainPhoto: GalleryItem | undefined;
-  mainPhotoBlurUrl: string | undefined;
+  mainPhoto: GalleryItem;
+  mainPhotoBlurUrl: string;
   galleryItems: GalleryItem[];
 }
 
@@ -24,19 +24,19 @@ export default function GalleryDisplay({
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(
     galleryItems.findIndex(
-      (item) => item.thumbnail.sys.id === mainPhoto?.thumbnail.sys.id
+      (item) => item.thumbnail.sys.id === mainPhoto.thumbnail.sys.id
     )
   );
 
-  const collectionName = mainPhoto?.gallery.name;
-  const collectionDescription = mainPhoto?.gallery.description;
-  const mainPhotoUrl = mainPhoto?.photo.url;
-  const mainPhotoTitle = mainPhoto?.photo.title;
-  const mainPhotoPaintingData = mainPhoto?.paintingData;
+  const collectionName = mainPhoto.gallery.name;
+  const collectionDescription = mainPhoto.gallery.description;
+  const mainPhotoUrl = mainPhoto.photo.url;
+  const mainPhotoTitle = mainPhoto.photo.title;
+  const mainPhotoPaintingData = mainPhoto.paintingData;
 
   let mainPhotoWidth = 1280;
   let mainPhotoHeight = 1250;
-  switch (collectionName?.toLowerCase()) {
+  switch (collectionName.toLowerCase()) {
     case t("abstractReverberations").toLowerCase():
       mainPhotoWidth = 1280;
       mainPhotoHeight = 860;
@@ -133,7 +133,7 @@ export default function GalleryDisplay({
           </button>
         </div>
         <Gallery
-          key={mainPhoto?.thumbnail.sys.id}
+          key={mainPhoto.thumbnail.sys.id}
           mainPhoto={mainPhoto}
           galleryItems={galleryItems}
         />
