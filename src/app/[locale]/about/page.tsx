@@ -13,6 +13,10 @@ export default async function About({
 
   const aboutPage = await getAboutPageData(getContentfulLocale(params.locale));
 
+  if (!aboutPage) {
+    return <div>Something went wrong. Please try again later.</div>;
+  }
+
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
       <h3 className="mb-4 font-bold text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">

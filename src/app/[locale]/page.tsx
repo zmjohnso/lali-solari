@@ -15,9 +15,13 @@ export default async function RootPage({
     getContentfulLocale(params.locale)
   );
 
-  const sortedItems = homePage.sort(
+  const sortedItems = homePage?.sort(
     (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
   );
+
+  if (!sortedItems) {
+    return <div>Something went wrong. Please try again later.</div>;
+  }
 
   return <Home homePage={sortedItems} />;
 }

@@ -15,18 +15,22 @@ export default async function Page({
   const galleryDisplayPage = await getGalleryDisplayPageData(
     getContentfulLocale(params.locale)
   );
-  const mainPhoto = galleryDisplayPage.find(
+  const mainPhoto = galleryDisplayPage?.find(
     (item) => item.thumbnail.sys.id === params.id
   );
-  const galleryItems = galleryDisplayPage.filter(
+  const galleryItems = galleryDisplayPage?.filter(
     (item) => item.gallery.name === mainPhoto?.gallery.name
   );
-  const sortedGalleryItems = galleryItems.sort(
+  const sortedGalleryItems = galleryItems?.sort(
     (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
   );
   const mainPhotoBlurUrl = mainPhoto?.photo.url
     ? await getBase64(mainPhoto.photo.url)
     : undefined;
+
+  if (!mainPhoto || !mainPhotoBlurUrl || !sortedGalleryItems) {
+    return <div>Something went wrong. Please try again later.</div>;
+  }
 
   return (
     <GalleryDisplay

@@ -89,24 +89,85 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
   }
 `;
 
+// async function fetchGraphQL<T>(
+//   query: string,
+//   variables: Record<string, any>
+// ): Promise<T | undefined> {
+//   try {
+//     const res = await fetch(
+//       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${process.env.CONTENTFUL_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
+//         },
+//         body: JSON.stringify({ query, variables }),
+//         // Associate all fetches with some cache tag so content can
+//         // be revalidated or updated from Contentful on publish
+//         next: { tags: ["portfolioContent"] },
+//       }
+//     );
+
+//     if (!res.ok) {
+//       throw new Error(
+//         `Failed to fetch from Contentful: ${res.status} ${res.statusText}`
+//       );
+//     }
+
+//     return res.json().then((response) => response as T);
+//   } catch (e) {
+//     if (e instanceof Error) console.log(e.stack);
+//   }
+// }
+
 async function fetchGraphQL<T>(
   query: string,
-  variables: Record<string, any>
-): Promise<T> {
-  return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.CONTENTFUL_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
-      },
-      body: JSON.stringify({ query, variables }),
-      // Associate all fetches with some cache tag so content can
-      // be revalidated or updated from Contentful on publish
-      next: { tags: ["portfolioContent"] },
+  variables: Record<string, any>,
+  retries: number = 3, // Default number of retries
+  delay: number = 1000 // Delay between retries in milliseconds
+): Promise<T | undefined> {
+  let attempt = 0;
+
+  while (attempt <= retries) {
+    try {
+      const res = await fetch(
+        `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.CONTENTFUL_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
+          },
+          body: JSON.stringify({ query, variables }),
+          next: { tags: ["portfolioContent"] },
+        }
+      );
+
+      if (!res.ok) {
+        const errorDetail = await res.text();
+        throw new Error(
+          `Failed to fetch from Contentful: ${res.status} ${res.statusText}. ${errorDetail}`
+        );
+      }
+
+      const data = await res.json();
+      return data as T;
+    } catch (error) {
+      if (attempt < retries) {
+        attempt++;
+        console.warn(`Attempt ${attempt} failed. Retrying in ${delay}ms...`);
+        await new Promise((res) => setTimeout(res, delay));
+      } else {
+        if (error instanceof Error) {
+          console.error(`Error in fetchGraphQL: ${error.message}`);
+        } else {
+          console.error(`Unexpected error: ${error}`);
+        }
+        return undefined;
+      }
     }
-  ).then((response) => response.json());
+  }
 }
 
 export async function getManifestoPageData(lang: ContentfulLocale) {
@@ -116,7 +177,7 @@ export async function getManifestoPageData(lang: ContentfulLocale) {
     variables
   );
   // there should only ever be one manifesto page, so we return the first item
-  return data.data.manifiestoCollection.items[0];
+  return data?.data.manifiestoCollection.items[0];
 }
 
 export async function getAboutPageData(lang: ContentfulLocale) {
@@ -126,27 +187,27 @@ export async function getAboutPageData(lang: ContentfulLocale) {
     variables
   );
   // there should only ever be one about page, so we return the first item
-  return data.data.aboutCollection.items[0];
+  return data?.data.aboutCollection.items[0];
 }
 
 export async function getMinimumHomePageData(
   lang: ContentfulLocale
-): Promise<MinimumHomePage[]> {
+): Promise<MinimumHomePage[] | undefined> {
   const variables = { locale: lang };
   const data = await fetchGraphQL<MinimumHomePageResponse>(
     MINIMUM_HOME_PAGE_QUERY,
     variables
   );
-  return data.data.minimumHomePageCollection.items;
+  return data?.data.minimumHomePageCollection.items;
 }
 
 export async function getGalleryDisplayPageData(
   lang: ContentfulLocale
-): Promise<GalleryItem[]> {
+): Promise<GalleryItem[] | undefined> {
   const variables = { locale: lang };
   const data = await fetchGraphQL<GalleryItemResponse>(
     GALLERY_DISPLAY_PAGE_QUERY,
     variables
   );
-  return data.data.galleryPhotoCollection.items;
+  return data?.data.galleryPhotoCollection.items;
 }
