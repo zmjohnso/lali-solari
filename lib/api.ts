@@ -89,38 +89,6 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
   }
 `;
 
-// async function fetchGraphQL<T>(
-//   query: string,
-//   variables: Record<string, any>
-// ): Promise<T | undefined> {
-//   try {
-//     const res = await fetch(
-//       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.CONTENTFUL_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
-//         },
-//         body: JSON.stringify({ query, variables }),
-//         // Associate all fetches with some cache tag so content can
-//         // be revalidated or updated from Contentful on publish
-//         next: { tags: ["portfolioContent"] },
-//       }
-//     );
-
-//     if (!res.ok) {
-//       throw new Error(
-//         `Failed to fetch from Contentful: ${res.status} ${res.statusText}`
-//       );
-//     }
-
-//     return res.json().then((response) => response as T);
-//   } catch (e) {
-//     if (e instanceof Error) console.log(e.stack);
-//   }
-// }
-
 async function fetchGraphQL<T>(
   query: string,
   variables: Record<string, any>,
