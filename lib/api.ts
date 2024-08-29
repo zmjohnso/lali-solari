@@ -29,6 +29,10 @@ const ABOUT_PAGE_QUERY = `
     aboutCollection(locale: $locale) {
       items {
         title
+        titlePhoto {
+          title
+          url
+        }
         description
         mediaCollection {
           items {

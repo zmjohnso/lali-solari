@@ -64,6 +64,7 @@ export interface AboutPageCollection {
 
 export interface AboutPage {
   title: string;
+  titlePhoto: MinimumPhoto;
   description: string;
   mediaCollection: {
     items: MinimumPhoto[];
