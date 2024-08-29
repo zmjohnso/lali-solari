@@ -8,6 +8,7 @@ import Gallery from "./gallery";
 import { Link, useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
+import BackButton from "./backButton";
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem;
@@ -137,11 +138,7 @@ export default function GalleryDisplay({
           mainPhoto={mainPhoto}
           galleryItems={galleryItems}
         />
-        <Link href="/">
-          <h3 className="flex justify-end pt-8 pr-8 font-bison font-bold italic text-7xl">
-            {t("back")}
-          </h3>
-        </Link>
+        <BackButton />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { getManifestoPageData } from "@/lib/api";
+import BackButton from "@/src/components/backButton";
 import { getContentfulLocale } from "@/src/shared/utilities";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
@@ -35,6 +36,7 @@ export default async function Manifesto({
           height={2268}
           priority
         />
+        <BackButton />
       </div>
     </div>
   );
