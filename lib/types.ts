@@ -83,7 +83,5 @@ export interface ManifestoPageCollection {
 export interface ManifestoPage {
   title: string;
   description: string;
-  mediaCollection: {
-    items: MinimumPhoto[];
-  };
+  media: MinimumPhoto;
 }

@@ -15,11 +15,9 @@ const MANIFESTO_PAGE_QUERY = `
       items {
         title
         description
-        mediaCollection {
-          items {
-            title
-            url
-          }
+        media {
+          title
+          url
         }
       }
     }
