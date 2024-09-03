@@ -23,7 +23,7 @@ export default async function About({
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
-      <div className="mb-20">
+      <div className="flex flex-col mb-20">
         <h3 className="mb-8 font-bold text-[clamp(1rem,10vw,3rem)] font-open-sans uppercase">
           {aboutPage.title}
         </h3>
@@ -37,7 +37,7 @@ export default async function About({
           blurDataURL={base64}
           priority
         />
-        <p className="flex self-center mb-8 w-80 md:w-7/12 ml-4 md:ml-52 font-arimo">
+        <p className="flex self-center mb-8 w-80 md:w-7/12 font-arimo">
           {aboutPage.description}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -46,7 +46,6 @@ export default async function About({
               <Image
                 src={item.url}
                 alt={item.title}
-                // optimize these values once final images are uploaded
                 width={300}
                 height={300}
                 className="w-full h-full object-cover"
