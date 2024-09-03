@@ -1,7 +1,9 @@
 "use client";
 
+import BackButton from "@/src/components/backButton";
 import { useForm, ValidationError } from "@formspree/react";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
+import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { useTranslations } from "next-intl";
 
 export default function Contact({ params }: { params: { locale: string } }) {
@@ -18,6 +20,19 @@ export default function Contact({ params }: { params: { locale: string } }) {
         <h3 className="text-[clamp(1rem,10vw,3rem)] font-open-sans mb-5">
           {t("title")}
         </h3>
+        <div className="flex items-center mb-6">
+          <FaInstagram className="mr-1 text-4xl text-neon-green" />
+          <p className="text-[clamp(1rem,2vw,1.5rem)] font-arimo">
+            <a
+              href="https://www.instagram.com/lalisolariart/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-inherit"
+            >
+              @lalisolariart
+            </a>
+          </p>
+        </div>
         <div className="flex items-center mb-6">
           <MdEmail className="mr-1 text-4xl text-neon-green" />
           <p className="text-[clamp(1rem,2vw,1.5rem)] font-arimo">
@@ -86,6 +101,7 @@ export default function Contact({ params }: { params: { locale: string } }) {
           )}
         </div>
       </div>
+      <BackButton />
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { Link, usePathname } from "../navigation";
 
 export default function Logo() {
   const pathname = usePathname();
-
   const isHomePage = pathname === "/";
 
   return (
@@ -18,18 +17,13 @@ export default function Logo() {
         })}
       >
         <Link href="/">
-          <h4
-            className={clsx("font-bold font-bison", {
-              "text-[clamp(2rem,6vw,10rem)]": isHomePage,
-              "text-[clamp(1rem,6vw,4rem)]": !isHomePage,
-            })}
-          >
+          <h4 className="font-bold font-bison text-[clamp(2rem,6vw,10rem)]">
             LALI SOLARI
           </h4>
         </Link>
         <Link href="/">
           <p
-            className="font-open-sans text-[clamp(0.5rem,1.25vw,6rem)]"
+            className="font-open-sans text-[clamp(0.4rem,1.25vw,6rem)]"
             lang="en"
           >
             FINE ARTS & EXCLUSIVE DESIGNS

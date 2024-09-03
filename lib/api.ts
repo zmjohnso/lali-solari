@@ -15,11 +15,9 @@ const MANIFESTO_PAGE_QUERY = `
       items {
         title
         description
-        mediaCollection {
-          items {
-            title
-            url
-          }
+        media {
+          title
+          url
         }
       }
     }
@@ -31,6 +29,10 @@ const ABOUT_PAGE_QUERY = `
     aboutCollection(locale: $locale) {
       items {
         title
+        titlePhoto {
+          title
+          url
+        }
         description
         mediaCollection {
           items {
