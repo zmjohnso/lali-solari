@@ -16,12 +16,12 @@ export default function Logo() {
           "pl-4": !isHomePage,
         })}
       >
-        <Link href="/">
+        <Link href="/" prefetch>
           <h4 className="font-bold font-bison text-[clamp(2rem,6vw,10rem)]">
             LALI SOLARI
           </h4>
         </Link>
-        <Link href="/">
+        <Link href="/" prefetch>
           <p
             className="font-open-sans text-[clamp(0.4rem,1.25vw,6rem)]"
             lang="en"

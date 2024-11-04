@@ -1,33 +1,60 @@
+"use client";
+
 import { PhotoWithId } from "@/lib/types";
 import Image from "next/image";
-import { Link } from "../navigation";
-import getBase64 from "../shared/getBase64";
+import { useRouter } from "../navigation";
+import { useState, useTransition } from "react";
+import { Loader2 } from "lucide-react";
+import clsx from "clsx";
 
 interface PhotoGridItemProps {
   thumbnail: PhotoWithId;
+  base64: string | undefined;
 }
 
-export default async function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
-  const photoUrl = thumbnail.url;
-  const photoTitle = thumbnail.title;
-  const base64 = await getBase64(photoUrl);
+export default function PhotoGridItem({
+  thumbnail,
+  base64,
+}: PhotoGridItemProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    setIsLoading(true);
+    startTransition(() => {
+      router.push(`/gallery/${thumbnail.sys.id}`);
+    });
+  };
 
   return (
-    <div className="flex items-center justify-center">
-      <Link href={`/gallery/${thumbnail.sys.id}`} prefetch>
+    <div className="relative flex items-center justify-center">
+      <button
+        onClick={handleClick}
+        className="w-full h-full"
+        disabled={isLoading || isPending}
+      >
         <Image
-          src={photoUrl}
-          alt={photoTitle}
+          src={thumbnail.url}
+          alt={thumbnail.title}
           loading="lazy"
-          className="max-w-full block max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105"
+          className={clsx(
+            "max-w-full block max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105",
+            {
+              "opacity-50": isLoading || isPending,
+            }
+          )}
           placeholder="blur"
           blurDataURL={base64}
-          // all thumbnails in Contentful are 2025x2025
-          // this is needed for the prerendering, then it will be responsive by default
           width={2025}
           height={2025}
         />
-      </Link>
+        {(isLoading || isPending) && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+            <Loader2 className="w-6 h-6 text-white animate-spin" />
+          </div>
+        )}
+      </button>
     </div>
   );
 }

@@ -18,6 +18,12 @@ export interface MinimumHomePage {
   thumbnail: PhotoWithId;
 }
 
+export interface HomePage {
+  title: string;
+  thumbnail: PhotoWithId;
+  base64: string | undefined;
+}
+
 export interface MinimumHomePageCollection {
   items: MinimumHomePage[];
 }

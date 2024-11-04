@@ -5,7 +5,7 @@ import { GalleryItem } from "../../lib/types";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Gallery from "./gallery";
-import { Link, useRouter } from "../navigation";
+import { useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import BackButton from "./backButton";
