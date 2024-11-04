@@ -14,7 +14,7 @@ export default async function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
 
   return (
     <div className="flex items-center justify-center">
-      <Link href={`/gallery/${thumbnail.sys.id}`}>
+      <Link href={`/gallery/${thumbnail.sys.id}`} prefetch>
         <Image
           src={photoUrl}
           alt={photoTitle}
