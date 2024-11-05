@@ -140,6 +140,17 @@ async function fetchGraphQL<T>(
   }
 }
 
+// TODO: what photo should be used for the open graph image?
+export async function getOpenGraphImage(lang: ContentfulLocale) {
+  const variables = { locale: lang };
+  const data = await fetchGraphQL<AboutPageResponse>(
+    ABOUT_PAGE_QUERY,
+    variables
+  );
+  // there should only ever be one about page, so we return the first item
+  return data?.data.aboutCollection.items[0].titlePhoto.url;
+}
+
 export async function getManifestoPageData(lang: ContentfulLocale) {
   const variables = { locale: lang };
   const data = await fetchGraphQL<ManifestoPageResponse>(

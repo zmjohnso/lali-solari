@@ -1,6 +1,13 @@
 {
   "LocaleLayout": {
-    "title": "Lali Solari"
+    "title": "Lali Solari",
+    "description": "Explore the personal portfolio of Lali Solari, an Argentinian artist based in Barcelona, Spain. Lali's mixed-media creations on paper and canvas combine textured acrylics with shimmering metallic watercolors, inviting viewers to immerse themselves in each piece and discover unique details with every look.",
+    "siteUrl": "https://www.lalisolari.com",
+    "siteName": "Lali Solari",
+    "ogImageAlt": "Lali Solari",
+    "twitterHandle": "@lalisolarii",
+    "twitterCreator": "@lalisolarii",
+    "canonicalUrl": "https://www.lalisolari.com/en"
   },
   "Home": {
     "metaDescription": "Home page for Lali Solari showcasing her various collections, with links to purchase her works, learn more about her, and contact her.",

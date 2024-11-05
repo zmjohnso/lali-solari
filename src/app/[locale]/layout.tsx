@@ -10,6 +10,8 @@ import {
 } from "next-intl/server";
 import { ReactNode } from "react";
 import { locales } from "@/src/config";
+import { getOpenGraphImage } from "@/lib/api";
+import { getContentfulLocale } from "@/src/shared/utilities";
 
 const arimo = Arimo({ subsets: ["latin"], variable: "--font-arimo" });
 const bebassNeue = Bebas_Neue({
@@ -40,9 +42,53 @@ export async function generateMetadata({
   params: { locale },
 }: Omit<LocaleLayoutProps, "children">) {
   const t = await getTranslations({ locale, namespace: "LocaleLayout" });
+  const ogImageUrl = await getOpenGraphImage(getContentfulLocale(locale));
 
   return {
     title: t("title"),
+    description: t("description"),
+    openGraph: {
+      type: "website",
+      locale: locale,
+      url: t("siteUrl"),
+      siteName: t("siteName"),
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 675,
+          alt: t("ogImageAlt"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: t("twitterHandle"),
+      creator: t("twitterCreator"),
+    },
+    alternates: {
+      languages: {
+        "en-US": "/en",
+        "es-ES": "/es",
+      },
+    },
+    canonical: t("canonicalUrl"),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+      maximumScale: 1,
+    },
   };
 }
 

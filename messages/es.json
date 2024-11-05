@@ -1,6 +1,13 @@
 {
   "LocaleLayout": {
-    "title": "Lali Solari"
+    "title": "Lali Solari",
+    "description": "Explora el portafolio personal de Lali Solari, una artista argentina radicada en Barcelona, España. Las creaciones de Lali en papel y lienzo combinan acrílicos texturizados con acuarelas metálicas brillantes, invitando al espectador a sumergirse en cada pieza y a descubrir detalles únicos en cada mirada.",
+    "siteUrl": "https://www.lalisolari.com",
+    "siteName": "Lali Solari",
+    "ogImageAlt": "Lali Solari",
+    "twitterHandle": "@lalisolarii",
+    "twitterCreator": "@lalisolarii",
+    "canonicalUrl": "https://www.lalisolari.com/es"
   },
   "Home": {
     "metaDescription": "Página principal de Lali Solari que muestra sus diversas colecciones, con enlaces para comprar sus obras, obtener más información sobre ella y contactarla.",
