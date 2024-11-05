@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Arimo, Bebas_Neue, Open_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
@@ -70,6 +71,7 @@ export default async function LocaleLayout({
           <section className="min-h-screen">
             <Header />
             {children}
+            <SpeedInsights />
           </section>
         </NextIntlClientProvider>
       </body>
