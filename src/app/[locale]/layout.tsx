@@ -69,9 +69,13 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <section className="min-h-screen">
-            <Header />
-            {children}
-            <SpeedInsights />
+            <header role="banner">
+              <Header />
+            </header>
+            <main role="main">
+              {children}
+              <SpeedInsights />
+            </main>
           </section>
         </NextIntlClientProvider>
       </body>

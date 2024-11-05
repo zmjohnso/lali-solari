@@ -54,6 +54,7 @@ export default function LanguageDropdown() {
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-controls="dropdownMenu"
+        aria-label="language dropdown button"
       >
         <MdTranslate size={23} />
       </button>
