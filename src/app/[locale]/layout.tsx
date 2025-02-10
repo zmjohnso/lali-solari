@@ -1,4 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Arimo, Bebas_Neue, Open_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
@@ -118,10 +119,9 @@ export default async function LocaleLayout({
             <header role="banner">
               <Header />
             </header>
-            <main role="main">
-              {children}
-              <SpeedInsights />
-            </main>
+            <main role="main">{children}</main>
+            <Analytics />
+            <SpeedInsights />
           </section>
         </NextIntlClientProvider>
       </body>
