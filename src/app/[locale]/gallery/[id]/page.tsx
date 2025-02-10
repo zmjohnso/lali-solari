@@ -1,18 +1,36 @@
+import { cache } from "react";
 import { getGalleryDisplayPageData } from "@/lib/api";
 import GalleryDisplay from "@/src/components/galleryDisplay";
 import getBase64 from "@/src/shared/getBase64";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { ContentfulLocale } from "@/lib/types";
+
+const cachedGetGalleryDisplayPageData = cache(getGalleryDisplayPageData);
+
+export async function generateStaticParams() {
+  const locales: ContentfulLocale[] = ["en-US", "es"];
+  const params = await Promise.all(
+    locales.map(async (locale) => {
+      const galleryDisplayPage = await cachedGetGalleryDisplayPageData(locale);
+      return galleryDisplayPage?.map((item) => ({
+        locale: locale,
+        id: item.thumbnail.sys.id,
+      }));
+    })
+  );
+
+  return params.flat();
+}
 
 export default async function Page({
   params,
 }: {
   params: { locale: string; id: string };
 }) {
-  // Enable static rendering
   unstable_setRequestLocale(params.locale);
 
-  const galleryDisplayPage = await getGalleryDisplayPageData(
+  const galleryDisplayPage = await cachedGetGalleryDisplayPageData(
     getContentfulLocale(params.locale)
   );
   const mainPhoto = galleryDisplayPage?.find(

@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { GalleryItem } from "../../lib/types";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import Gallery from "./gallery";
 import { useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import BackButton from "./backButton";
+import dynamic from "next/dynamic";
+
+const Gallery = dynamic(() => import("./gallery"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 export interface GalleryDisplayPageProps {
   mainPhoto: GalleryItem;
@@ -35,26 +40,8 @@ export default function GalleryDisplay({
   const mainPhotoTitle = mainPhoto.photo.title;
   const mainPhotoPaintingData = mainPhoto.paintingData;
 
-  let mainPhotoWidth = 1280;
-  let mainPhotoHeight = 1250;
-  switch (collectionName.toLowerCase()) {
-    case t("abstractReverberations").toLowerCase():
-      mainPhotoWidth = 1280;
-      mainPhotoHeight = 860;
-      break;
-    case t("roots").toLowerCase():
-      mainPhotoWidth = 3100;
-      mainPhotoHeight = 3100;
-      break;
-    case t("symbiosis").toLowerCase():
-      mainPhotoWidth = 1280;
-      mainPhotoHeight = 1275;
-      break;
-    case t("pandemic").toLowerCase():
-      mainPhotoWidth = 1280;
-      mainPhotoHeight = 1250;
-      break;
-  }
+  const mainPhotoWidth = 1920;
+  const mainPhotoHeight = 1080;
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
@@ -109,6 +96,7 @@ export default function GalleryDisplay({
                     placeholder="blur"
                     blurDataURL={mainPhotoBlurUrl}
                     priority
+                    loading="eager"
                   />
                 </TransformComponent>
               </TransformWrapper>
@@ -133,11 +121,13 @@ export default function GalleryDisplay({
             &#8594;
           </button>
         </div>
-        <Gallery
-          key={mainPhoto.thumbnail.sys.id}
-          mainPhoto={mainPhoto}
-          galleryItems={galleryItems}
-        />
+        <Suspense fallback={<div>Loading gallery...</div>}>
+          <Gallery
+            key={mainPhoto.thumbnail.sys.id}
+            mainPhoto={mainPhoto}
+            galleryItems={galleryItems}
+          />
+        </Suspense>
         <BackButton />
       </div>
     </div>

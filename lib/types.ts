@@ -1,16 +1,13 @@
 export type ContentfulLocale = "en-US" | "es";
-export interface PhotoWithId {
-  sys: {
-    id: string;
-  };
-  title: string;
-  url: string;
-  blurUrl?: string;
-}
-
 export interface MinimumPhoto {
   title: string;
   url: string;
+}
+export interface PhotoWithId extends MinimumPhoto {
+  sys: {
+    id: string;
+  };
+  blurUrl?: string;
 }
 
 export interface MinimumHomePage {
