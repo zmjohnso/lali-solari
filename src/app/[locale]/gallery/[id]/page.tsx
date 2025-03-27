@@ -1,10 +1,9 @@
 import { cache } from "react";
 import { getGalleryDisplayPageData } from "@/lib/api";
 import GalleryDisplay from "@/src/components/galleryDisplay";
-import getBase64 from "@/src/shared/getBase64";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
-import { unstable_setRequestLocale } from "next-intl/server";
 import { ContentfulLocale } from "@/lib/types";
+import { setRequestLocale } from "next-intl/server";
 
 const cachedGetGalleryDisplayPageData = cache(getGalleryDisplayPageData);
 
@@ -23,12 +22,11 @@ export async function generateStaticParams() {
   return params.flat();
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { locale: string; id: string };
+export default async function Page(props: {
+  params: Promise<{ locale: string; id: string }>;
 }) {
-  unstable_setRequestLocale(params.locale);
+  const params = await props.params;
+  setRequestLocale(params.locale);
 
   const galleryDisplayPage = await cachedGetGalleryDisplayPageData(
     getContentfulLocale(params.locale)
@@ -42,9 +40,8 @@ export default async function Page({
   const sortedGalleryItems = galleryItems?.sort(
     (a, b) => extractPhotoId(a.title) - extractPhotoId(b.title)
   );
-  const mainPhotoBlurUrl = mainPhoto?.photo.url
-    ? await getBase64(mainPhoto.photo.url)
-    : undefined;
+
+  const mainPhotoBlurUrl = mainPhoto?.photo.lowQualityUrl;
 
   if (!mainPhoto || !mainPhotoBlurUrl || !sortedGalleryItems) {
     return <div>Something went wrong. Please try again later.</div>;

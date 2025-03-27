@@ -2,20 +2,16 @@
 
 import { PhotoWithId } from "@/lib/types";
 import Image from "next/image";
-import { useRouter } from "../navigation";
 import { useState, useTransition } from "react";
 import { Loader2 } from "lucide-react";
 import clsx from "clsx";
+import { useRouter } from "../i18n/navigation";
 
 interface PhotoGridItemProps {
   thumbnail: PhotoWithId;
-  base64: string | undefined;
 }
 
-export default function PhotoGridItem({
-  thumbnail,
-  base64,
-}: PhotoGridItemProps) {
+export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +19,10 @@ export default function PhotoGridItem({
   const handleClick = () => {
     setIsLoading(true);
     startTransition(() => {
-      router.push(`/gallery/${thumbnail.sys.id}`);
+      router.push({
+        pathname: "/gallery/[id]",
+        params: { id: thumbnail.sys.id },
+      });
     });
   };
 
@@ -37,7 +36,6 @@ export default function PhotoGridItem({
         <Image
           src={thumbnail.url}
           alt={thumbnail.title}
-          loading="lazy"
           className={clsx(
             "max-w-full block max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105",
             {
@@ -45,7 +43,7 @@ export default function PhotoGridItem({
             }
           )}
           placeholder="blur"
-          blurDataURL={base64}
+          blurDataURL={thumbnail.lowQualityUrl}
           width={2025}
           height={2025}
         />

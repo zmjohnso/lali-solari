@@ -1,25 +1,21 @@
 import { getAboutPageData } from "@/lib/api";
 import Image from "next/image";
 import { getContentfulLocale } from "@/src/shared/utilities";
-import { unstable_setRequestLocale } from "next-intl/server";
 import BackButton from "@/src/components/backButton";
-import getBase64 from "@/src/shared/getBase64";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function About({
-  params,
-}: {
-  params: { locale: string };
+export default async function About(props: {
+  params: Promise<{ locale: string }>;
 }) {
+  const params = await props.params;
   // Enable static rendering
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
 
   const aboutPage = await getAboutPageData(getContentfulLocale(params.locale));
 
   if (!aboutPage) {
     return <div>Something went wrong. Please try again later.</div>;
   }
-
-  const base64 = await getBase64(aboutPage.titlePhoto.url);
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
@@ -34,7 +30,7 @@ export default async function About({
           width={3024}
           height={3781}
           placeholder="blur"
-          blurDataURL={base64}
+          blurDataURL={aboutPage.titlePhoto.lowQualityUrl}
           priority
         />
         <p className="flex self-center mb-8 w-80 md:w-7/12 font-arimo">

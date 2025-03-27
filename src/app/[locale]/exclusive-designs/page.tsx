@@ -1,13 +1,15 @@
+import { use } from "react";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
-export default function ExclusiveDesigns({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export default function ExclusiveDesigns(
+  props: {
+    params: Promise<{ locale: string }>;
+  }
+) {
+  const params = use(props.params);
   // Enable static rendering
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
 
   const t = useTranslations("ExclusiveDesigns");
 

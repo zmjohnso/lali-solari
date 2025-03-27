@@ -2,12 +2,12 @@ export type ContentfulLocale = "en-US" | "es";
 export interface MinimumPhoto {
   title: string;
   url: string;
+  lowQualityUrl: string;
 }
 export interface PhotoWithId extends MinimumPhoto {
   sys: {
     id: string;
   };
-  blurUrl?: string;
 }
 
 export interface MinimumHomePage {
@@ -18,7 +18,6 @@ export interface MinimumHomePage {
 export interface HomePage {
   title: string;
   thumbnail: PhotoWithId;
-  base64: string | undefined;
 }
 
 export interface MinimumHomePageCollection {

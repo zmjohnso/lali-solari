@@ -1,24 +1,33 @@
 import { MetadataRoute } from "next";
-import { getPathname } from "../navigation";
-import { defaultLocale, host, locales, pathnames } from "../config";
+import { Locale } from "next-intl";
+import { host } from "../config";
+import { routing } from "../i18n/routing";
+import { getPathname } from "../i18n/navigation";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const keys = Object.keys(pathnames) as Array<keyof typeof pathnames>;
+  return [
+    ...getEntries("/"),
+    ...getEntries("/about"),
+    ...getEntries("/contact"),
+    ...getEntries("/exclusive-designs"),
+    ...getEntries("/manifesto"),
+  ];
+}
 
-  function getUrl(
-    key: keyof typeof pathnames,
-    locale: (typeof locales)[number]
-  ) {
-    const pathname = getPathname({ locale, href: key });
-    return `${host}/${locale}${pathname === "/" ? "" : pathname}`;
-  }
+type Href = Parameters<typeof getPathname>[0]["href"];
 
-  return keys.map((key) => ({
-    url: getUrl(key, defaultLocale),
+function getEntries(href: Href) {
+  return routing.locales.map((locale) => ({
+    url: getUrl(href, locale),
     alternates: {
       languages: Object.fromEntries(
-        locales.map((locale) => [locale, getUrl(key, locale)])
+        routing.locales.map((cur) => [cur, getUrl(href, cur)])
       ),
     },
   }));
+}
+
+function getUrl(href: Href, locale: Locale) {
+  const pathname = getPathname({ locale, href });
+  return host + pathname;
 }

@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { extractTitle } from "@/src/shared/utilities";
 import { HomePage } from "@/lib/types";
-import { Link } from "../navigation";
 import PhotoGridItem from "./photoGridItem";
+import { Link } from "../i18n/navigation";
 
 interface HomePageProps {
   homePage: HomePage[];
@@ -78,7 +78,13 @@ export default function Home({ homePage }: HomePageProps) {
           EXCLUSIVE DESIGNS
         </h2>
       </Link>
-      <Link href={`/gallery/${arPhotos[0].thumbnail.sys.id}`} prefetch>
+      <Link
+        href={{
+          pathname: "/gallery/[id]",
+          params: { id: arPhotos[0].thumbnail.sys.id },
+        }}
+        prefetch
+      >
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mb-1 mt-6">
           {abstractReverberationsName}
         </h2>
@@ -88,11 +94,16 @@ export default function Home({ homePage }: HomePageProps) {
           <PhotoGridItem
             key={photo.thumbnail.title}
             thumbnail={photo.thumbnail}
-            base64={photo.base64}
           />
         ))}
       </div>
-      <Link href={`/gallery/${rootsPhotos[0].thumbnail.sys.id}`} prefetch>
+      <Link
+        href={{
+          pathname: "/gallery/[id]",
+          params: { id: rootsPhotos[0].thumbnail.sys.id },
+        }}
+        prefetch
+      >
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {rootsName}
         </h2>
@@ -102,11 +113,16 @@ export default function Home({ homePage }: HomePageProps) {
           <PhotoGridItem
             key={photo.thumbnail.title}
             thumbnail={photo.thumbnail}
-            base64={photo.base64}
           />
         ))}
       </div>
-      <Link href={`/gallery/${symbiosisPhotos[0].thumbnail.sys.id}`} prefetch>
+      <Link
+        href={{
+          pathname: "/gallery/[id]",
+          params: { id: symbiosisPhotos[0].thumbnail.sys.id },
+        }}
+        prefetch
+      >
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {symbiosisName}
         </h2>
@@ -116,11 +132,16 @@ export default function Home({ homePage }: HomePageProps) {
           <PhotoGridItem
             key={photo.thumbnail.title}
             thumbnail={photo.thumbnail}
-            base64={photo.base64}
           />
         ))}
       </div>
-      <Link href={`/gallery/${pandemicPhotos[0].thumbnail.sys.id}`} prefetch>
+      <Link
+        href={{
+          pathname: "/gallery/[id]",
+          params: { id: pandemicPhotos[0].thumbnail.sys.id },
+        }}
+        prefetch
+      >
         <h2 className="font-bold font-bebas uppercase text-center text-[clamp(2rem,6vw,10rem)] mt-8 mb-2">
           {pandemicName}
         </h2>
@@ -130,7 +151,6 @@ export default function Home({ homePage }: HomePageProps) {
           <PhotoGridItem
             key={photo.thumbnail.title}
             thumbnail={photo.thumbnail}
-            base64={photo.base64}
           />
         ))}
       </div>

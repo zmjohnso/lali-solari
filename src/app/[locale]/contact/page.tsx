@@ -6,7 +6,7 @@ import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { useTranslations } from "next-intl";
 
-export default function Contact({ params }: { params: { locale: string } }) {
+export default function Contact() {
   const t = useTranslations("Contact");
   const [state, handleSubmit] = useForm(
     process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_FORM || ""

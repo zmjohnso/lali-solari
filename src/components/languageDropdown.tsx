@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
-import { usePathname, useRouter } from "../navigation";
 import clsx from "clsx";
+import { usePathname, useRouter } from "../i18n/navigation";
+import { useParams } from "next/navigation";
 
 export default function LanguageDropdown() {
   const router = useRouter();
+  const params = useParams();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +41,29 @@ export default function LanguageDropdown() {
   const handleLanguageMode = (currentLanguage: string) => {
     const newRouteLanguage = currentLanguage === "English" ? "en" : "es";
     startTransition(() => {
-      router.replace(pathname, { locale: newRouteLanguage });
+      // Handle dynamic routes differently
+      if (pathname.startsWith("/gallery/")) {
+        router.replace(
+          {
+            pathname: "/gallery/[id]",
+            params: { id: params.id as string },
+          },
+          { locale: newRouteLanguage }
+        );
+      } else {
+        // Handle static routes
+        router.replace(
+          {
+            pathname: pathname as
+              | "/"
+              | "/about"
+              | "/contact"
+              | "/exclusive-designs"
+              | "/manifesto",
+          },
+          { locale: newRouteLanguage }
+        );
+      }
     });
   };
 
