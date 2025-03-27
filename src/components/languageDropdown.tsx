@@ -4,9 +4,11 @@ import { useState, useRef, useEffect, useTransition } from "react";
 import { MdTranslate } from "@react-icons/all-files/md/MdTranslate";
 import clsx from "clsx";
 import { usePathname, useRouter } from "../i18n/navigation";
+import { useParams } from "next/navigation";
 
 export default function LanguageDropdown() {
   const router = useRouter();
+  const params = useParams();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +43,10 @@ export default function LanguageDropdown() {
     startTransition(() => {
       // Handle dynamic routes differently
       if (pathname.startsWith("/gallery/")) {
-        // Extract the ID from the current pathname
-        const id = pathname.split("/").pop() || "";
         router.replace(
           {
             pathname: "/gallery/[id]",
-            params: { id },
+            params: { id: params.id as string },
           },
           { locale: newRouteLanguage }
         );
