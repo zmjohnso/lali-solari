@@ -1,17 +1,15 @@
 import { getManifestoPageData } from "@/lib/api";
 import BackButton from "@/src/components/backButton";
-import getBase64 from "@/src/shared/getBase64";
 import { getContentfulLocale } from "@/src/shared/utilities";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
-export default async function Manifesto({
-  params,
-}: {
-  params: { locale: string };
+export default async function Manifesto(props: {
+  params: Promise<{ locale: string }>;
 }) {
+  const params = await props.params;
   // Enable static rendering
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
 
   const manifestoPage = await getManifestoPageData(
     getContentfulLocale(params.locale)
@@ -20,8 +18,6 @@ export default async function Manifesto({
   if (!manifestoPage) {
     return <div>Something went wrong. Please try again later.</div>;
   }
-
-  const base64 = await getBase64(manifestoPage.media.url);
 
   return (
     <div className="px-4 md:px-40 pt-2 md:pt-20">
@@ -36,7 +32,7 @@ export default async function Manifesto({
           width={4032}
           height={2268}
           placeholder="blur"
-          blurDataURL={base64}
+          blurDataURL={manifestoPage.media.lowQualityUrl}
           priority
         />
         <p className="flex self-center mb-8 w-80 md:w-7/12 font-arimo">

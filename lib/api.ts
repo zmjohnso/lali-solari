@@ -32,12 +32,14 @@ const ABOUT_PAGE_QUERY = `
         titlePhoto {
           title
           url
+          lowQualityUrl: url(transform: { format: WEBP, quality: 10 })
         }
         description
         mediaCollection {
           items {
             title
             url
+            lowQualityUrl: url(transform: { format: WEBP, quality: 10 })
           }
         }
       }
@@ -56,6 +58,7 @@ const MINIMUM_HOME_PAGE_QUERY = `
           }
           title
           url
+          lowQualityUrl: url(transform: { format: WEBP, quality: 10 })
         }
       }
     }
@@ -70,6 +73,7 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
         photo {
           title
           url
+          lowQualityUrl: url(transform: { format: WEBP, quality: 10 })
         }
         thumbnail {
           sys {
@@ -77,6 +81,7 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
           }
           title
           url
+          lowQualityUrl: url(transform: { format: WEBP, quality: 10 })
         }
         gallery {
           name
@@ -90,6 +95,59 @@ const GALLERY_DISPLAY_PAGE_QUERY = `
     }
   }
 `;
+
+async function convertToDataUrl(imageUrl: string): Promise<string> {
+  try {
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch image: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const buffer = await response.arrayBuffer();
+    const contentType = response.headers.get("content-type") || "image/webp";
+    const base64 = Buffer.from(buffer).toString("base64");
+    // manually create data URLs: data:[<media-type>][;base64],<data>
+    return `data:${contentType};base64,${base64}`;
+  } catch (error) {
+    console.error("Error converting image to data URL:", error);
+    // Fallback to original URL if conversion fails
+    return imageUrl;
+  }
+}
+
+async function processItemsWithImages<T extends { [key: string]: any }>(
+  items: T[],
+  imagePaths: string[]
+): Promise<T[]> {
+  return Promise.all(
+    items.map(async (item) => {
+      const newItem = { ...item };
+
+      for (const path of imagePaths) {
+        const keys = path.split(".");
+        let current: any = newItem;
+
+        for (let i = 0; i < keys.length - 1; i++) {
+          current = current[keys[i]];
+        }
+
+        const lastKey = keys[keys.length - 1];
+        if (current[lastKey]?.lowQualityUrl) {
+          current[lastKey] = {
+            ...current[lastKey],
+            lowQualityUrl: await convertToDataUrl(
+              current[lastKey].lowQualityUrl
+            ),
+          };
+        }
+      }
+
+      return newItem;
+    })
+  );
+}
 
 async function fetchGraphQL<T>(
   query: string,
@@ -157,8 +215,13 @@ export async function getManifestoPageData(lang: ContentfulLocale) {
     MANIFESTO_PAGE_QUERY,
     variables
   );
+  const items = data?.data.manifiestoCollection.items;
+  if (!items) return undefined;
+
+  const processedItems = await processItemsWithImages(items, ["media"]);
+
   // there should only ever be one manifesto page, so we return the first item
-  return data?.data.manifiestoCollection.items[0];
+  return processedItems[0];
 }
 
 export async function getAboutPageData(lang: ContentfulLocale) {
@@ -167,8 +230,15 @@ export async function getAboutPageData(lang: ContentfulLocale) {
     ABOUT_PAGE_QUERY,
     variables
   );
+  const items = data?.data.aboutCollection.items;
+  if (!items) return undefined;
+
+  const processedItems = await processItemsWithImages(items, [
+    "titlePhoto",
+    "mediaCollection.items",
+  ]);
   // there should only ever be one about page, so we return the first item
-  return data?.data.aboutCollection.items[0];
+  return processedItems[0];
 }
 
 export async function getMinimumHomePageData(
@@ -179,7 +249,10 @@ export async function getMinimumHomePageData(
     MINIMUM_HOME_PAGE_QUERY,
     variables
   );
-  return data?.data.minimumHomePageCollection.items;
+  const items = data?.data.minimumHomePageCollection.items;
+  if (!items) return undefined;
+
+  return await processItemsWithImages(items, ["thumbnail"]);
 }
 
 export async function getGalleryDisplayPageData(
@@ -190,5 +263,8 @@ export async function getGalleryDisplayPageData(
     GALLERY_DISPLAY_PAGE_QUERY,
     variables
   );
-  return data?.data.galleryPhotoCollection.items;
+  const items = data?.data.galleryPhotoCollection.items;
+  if (!items) return undefined;
+
+  return await processItemsWithImages(items, ["photo", "thumbnail"]);
 }

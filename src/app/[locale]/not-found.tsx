@@ -1,4 +1,4 @@
-import { Link } from "@/src/navigation";
+import { Link } from "@/src/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 // Note that `app/[locale]/[...rest]/page.tsx`

@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { Link, usePathname } from "../navigation";
+import { Link, usePathname } from "../i18n/navigation";
 
 export default function Logo() {
   const pathname = usePathname();

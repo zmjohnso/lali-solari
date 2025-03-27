@@ -4,11 +4,11 @@ import { Suspense, useState } from "react";
 import { GalleryItem } from "../../lib/types";
 import Image from "next/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { useRouter } from "../navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import BackButton from "./backButton";
 import dynamic from "next/dynamic";
+import { useRouter } from "../i18n/navigation";
 
 const Gallery = dynamic(() => import("./gallery"), {
   loading: () => <p>Loading...</p>,
@@ -47,7 +47,10 @@ export default function GalleryDisplay({
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
       router.push(
-        `/gallery/${galleryItems[currentIndex - 1].thumbnail.sys.id}`,
+        {
+          pathname: "/gallery/[id]",
+          params: { id: galleryItems[currentIndex - 1].thumbnail.sys.id },
+        },
         { scroll: false }
       );
     }
@@ -57,7 +60,10 @@ export default function GalleryDisplay({
     if (currentIndex < galleryItems.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       router.push(
-        `/gallery/${galleryItems[currentIndex + 1].thumbnail.sys.id}`,
+        {
+          pathname: "/gallery/[id]",
+          params: { id: galleryItems[currentIndex + 1].thumbnail.sys.id },
+        },
         { scroll: false }
       );
     }

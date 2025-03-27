@@ -1,17 +1,14 @@
 import { getMinimumHomePageData } from "@/lib/api";
-import { HomePage } from "@/lib/types";
 import Home from "@/src/components/home";
-import getBase64 from "@/src/shared/getBase64";
 import { extractPhotoId, getContentfulLocale } from "@/src/shared/utilities";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function RootPage({
-  params,
-}: {
-  params: { locale: string };
+export default async function RootPage(props: {
+  params: Promise<{ locale: string }>;
 }) {
+  const params = await props.params;
   // Enable static rendering
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
 
   const homePage = await getMinimumHomePageData(
     getContentfulLocale(params.locale)
@@ -25,12 +22,5 @@ export default async function RootPage({
     return <div>Something went wrong. Please try again later.</div>;
   }
 
-  const sortedItemsWithBase64: HomePage[] = await Promise.all(
-    sortedItems.map(async (photo) => ({
-      ...photo,
-      base64: await getBase64(photo.thumbnail.url),
-    }))
-  );
-
-  return <Home homePage={sortedItemsWithBase64} />;
+  return <Home homePage={sortedItems} />;
 }

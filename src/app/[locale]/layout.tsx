@@ -2,17 +2,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Arimo, Bebas_Neue, Open_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { routing } from "@/src/i18n/routing";
 import Header from "@/src/components/header";
 import {
-  getMessages,
   getTranslations,
-  unstable_setRequestLocale,
+  setRequestLocale,
 } from "next-intl/server";
 import { ReactNode } from "react";
-import { locales } from "@/src/config";
 import { getOpenGraphImage } from "@/lib/api";
 import { getContentfulLocale } from "@/src/shared/utilities";
+import { notFound } from "next/navigation";
 
 const arimo = Arimo({ subsets: ["latin"], variable: "--font-arimo" });
 const bebassNeue = Bebas_Neue({
@@ -36,12 +36,16 @@ type LocaleLayoutProps = {
 };
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params: { locale },
-}: Omit<LocaleLayoutProps, "children">) {
+export async function generateMetadata(
+  props: Omit<LocaleLayoutProps, "children">
+) {
+  const params = await props.params;
+
+  const { locale } = params;
+
   const t = await getTranslations({ locale, namespace: "LocaleLayout" });
   const ogImageUrl = await getOpenGraphImage(getContentfulLocale(locale));
 
@@ -98,23 +102,23 @@ export async function generateMetadata({
 // for future optimization of the Header component (pull out interactive parts into a client component)
 // and leave the static elements (i.e. the logo) in the server component
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: Readonly<LocaleLayoutProps>) {
-  // Enable static rendering
-  unstable_setRequestLocale(locale);
+export default async function LocaleLayout(props: Readonly<LocaleLayoutProps>) {
+  const { locale } = await props.params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
+  const { children } = props;
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   return (
     <html lang={locale}>
       <body
         className={`${arimo.variable} ${bebassNeue.variable} ${openSans.variable} ${bison.variable}`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider>
           <section className="min-h-screen">
             <header role="banner">
               <Header />

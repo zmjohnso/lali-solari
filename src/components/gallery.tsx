@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { extractPhotoId } from "../shared/utilities";
 import Image from "next/image";
-import { Link } from "../navigation";
 import { GalleryItem } from "@/lib/types";
 import clsx from "clsx";
+import { Link } from "../i18n/navigation";
 
 export interface GalleryProps {
   mainPhoto: GalleryItem | undefined;
@@ -59,7 +59,13 @@ export default function Gallery({ mainPhoto, galleryItems }: GalleryProps) {
         <div className="grid grid-cols-5 gap-2">
           {visibleImages.map((item) => (
             <div key={item.thumbnail.title} className="flex items-center">
-              <Link href={`/gallery/${item.thumbnail.sys.id}`} scroll={false}>
+              <Link
+                href={{
+                  pathname: "/gallery/[id]",
+                  params: { id: item.thumbnail.sys.id },
+                }}
+                scroll={false}
+              >
                 <Image
                   src={item.thumbnail.url}
                   alt={item.thumbnail.title}
