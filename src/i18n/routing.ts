@@ -22,7 +22,6 @@ export const routing = defineRouting({
       es: "/manifiesto",
     },
     "/gallery/[id]": {
-      // Use Next.js dynamic segment syntax
       en: "/gallery/[id]",
       es: "/gallery/[id]",
     },

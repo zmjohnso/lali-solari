@@ -36,7 +36,6 @@ export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
         <Image
           src={thumbnail.url}
           alt={thumbnail.title}
-          // loading="lazy"
           className={clsx(
             "max-w-full block max-h-full transition-transform duration-300 flex-shrink-0 hover:scale-105",
             {
