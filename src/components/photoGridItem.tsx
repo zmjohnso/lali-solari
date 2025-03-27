@@ -26,7 +26,6 @@ export default function PhotoGridItem({ thumbnail }: PhotoGridItemProps) {
     });
   };
 
-  console.log("dataURL: ", thumbnail.lowQualityUrl);
   return (
     <div className="relative flex items-center justify-center">
       <button
